@@ -6,10 +6,10 @@ import Point
 data City = Cit String Point deriving (Eq, Show)
 
 newC :: String -> Point -> City
-newC nombre ubicacion = Cit nombre ubicacion
+newC name place = Cit name place
 
 nameC :: City -> String
-nameC (Cit nombre ubicacion) = nombre
+nameC (Cit name place) = name
 
 distanceC :: City -> City -> Float
-distanceC (Cit nombre1 ubicacion1) (Cit nombre2 ubicacion2) = difP ubicacion1 ubicacion2
+distanceC (Cit name1 place1) (Cit name2 place2) = difP place1 place2
