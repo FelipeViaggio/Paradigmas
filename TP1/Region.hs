@@ -1,7 +1,11 @@
 module Region ( Region, newR, foundR, linkR, tunelR, pathR, linksForR, connectedR, linkedR, delayR, availableCapacityForR, usedCapacityForR )
    where
 
+import Point
 import City
+import Quality
+import Link
+import Tunel
 
 
 data Region = Reg [City] [Link] [Tunel]
