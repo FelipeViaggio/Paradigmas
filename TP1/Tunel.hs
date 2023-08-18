@@ -18,7 +18,7 @@ connectsT city1 city2 (Tun links) | linkPosition city1 (head links) == 1 && link
                                   | otherwise = False
 
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
-usesT link (Tun listaLinks) = elem link listaLinks
+usesT link (Tun listLinks) = elem link listLinks
 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
 delayT (Tun []) = 0
