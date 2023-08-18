@@ -1,4 +1,4 @@
-module Link ( Link, newL, linksL, connectsL, linkPosition, capacityL, delayL )
+module Link ( Link, newL, samelink, linksL, connectsL, linkPosition, capacityL, delayL )
    where
 
 import City
@@ -8,6 +8,10 @@ data Link = Lin City City Quality deriving (Eq, Show)
 
 newL :: City -> City -> Quality -> Link -- genera un link entre dos ciudades distintas
 newL cityA cityB quality = Lin cityA cityB quality
+
+samelink :: Link -> Link -> Bool
+samelink (Lin cityA cityB quality) (Lin cityC cityD quality2) | (cityA == cityC && cityB == cityD) || (cityA == cityD && cityB == cityC) = True
+                                                              | otherwise = False
 
 connectsL :: City -> Link -> Bool   -- indica si esta ciudad es parte de este link
 connectsL thisCity (Lin cityA cityB quality) | thisCity == cityA || thisCity == cityB = True
