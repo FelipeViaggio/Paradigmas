@@ -1,4 +1,4 @@
-module Link ( Link, newL, linksL, connectsL, capacityL, delayL )
+module Link ( Link, newL, linksL, connectsL, linkPosition, capacityL, delayL )
    where
 
 import City
@@ -12,6 +12,11 @@ newL cityA cityB quality = Lin cityA cityB quality
 connectsL :: City -> Link -> Bool   -- indica si esta ciudad es parte de este link
 connectsL thisCity (Lin cityA cityB quality) | thisCity == cityA || thisCity == cityB = True
                                              | otherwise = False
+
+linkPosition :: City -> Link -> Int
+linkPosition city (Lin cityA cityB quality) | city == cityA = 1
+                                            | city == cityB = 2
+                                            | otherwise = 0
 
 linksL :: City -> City -> Link -> Bool -- indica si estas dos ciudades distintas estan conectadas mediante este link
 linksL firstCity secondCity (Lin cityA cityB quality) | (firstCity == cityA && secondCity == cityB) || (firstCity == cityB && secondCity == cityA) = True

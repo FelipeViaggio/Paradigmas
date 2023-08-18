@@ -1,7 +1,9 @@
 module Tunel ( Tunel, newT, connectsT, usesT, delayT )
    where
 
+import Point
 import City
+import Quality
 import Link
 import GHC.Exts.Heap (GenClosure(link))
 
@@ -11,8 +13,9 @@ newT :: [Link] -> Tunel
 newT (link:listaLinks) = Tun (link:listaLinks)
 
 connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
-connectsT city1 city2 (Tun links) = (connectsL city1 (head links)) && (connectsL city2 (last links)) || 
-                                    (connectsL city2 (head links)) && (connectsL city1 (last links))
+connectsT city1 city2 (Tun links) | linkPosition city1 (head links) == 1 && linkPosition city2 (last links) == 2 || 
+                                    linkPosition city2 (head links) == 1 && linkPosition city1 (last links) == 2 = True
+                                  | otherwise = False
 
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
 usesT link (Tun listaLinks) = elem link listaLinks
