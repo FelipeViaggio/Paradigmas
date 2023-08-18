@@ -1,8 +1,5 @@
-module Point ( Point, newP, difP)
+module Point ( Point, newP, difP )
    where
-
-
-
 data Point = Poi Int Int deriving (Eq, Show)
 
 newP :: Int -> Int -> Point
