@@ -14,8 +14,8 @@ connectsL thisCity (Lin cityA cityB quality) | thisCity == cityA || thisCity == 
                                              | otherwise = False
 
 linkPosition :: City -> Link -> Int
-linkPosition city (Lin cityA cityB quality) | city == cityA = 1
-                                            | city == cityB = 2
+linkPosition thisCity (Lin cityA cityB quality) | thisCity == cityA = 1
+                                            | thisCity == cityB = 2
                                             | otherwise = 0
 
 linksL :: City -> City -> Link -> Bool -- indica si estas dos ciudades distintas estan conectadas mediante este link
