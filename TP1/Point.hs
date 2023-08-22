@@ -3,7 +3,7 @@ module Point ( Point, newP, difP )
 data Point = Poi Int Int deriving (Eq, Show)
 
 newP :: Int -> Int -> Point
-newP cordX cordY = Poi cordX cordY
+newP coordX coordY = Poi coordX coordY
 
 substraction :: Point -> Point -> Point
 substraction (Poi x1 y1) (Poi x2 y2) = Poi (x1 - x2) (y1 - y2)
