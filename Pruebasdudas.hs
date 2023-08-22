@@ -37,4 +37,5 @@ counterintunnels (Reg cities links tunels) city1 city2 = foldr(\tunel acc -> cou
          where counterfortunel (Tun )
 
 
+
 -- Pathr, linksforR, usedcapacity, available capavity revisar, borrar el deriving de region

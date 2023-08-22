@@ -43,12 +43,12 @@ lista = [difP punto1 punto2 == 1.4142135, difP punto1 punto3 == 2.828427, difP p
         distanceC madrid berlin == 1.4142135, distanceC berlin bsas == 1.4142135, distanceC madrid bsas == 2.828427,
         capacityQ calidad1 == 1, capacityQ calidad2 == 2,
         delayQ calidad1 == 1.0, delayQ calidad2 == 2.0,
-        connectsL madrid linkMB == True, connectsL berlin linkMB == True, connectsL bsas linkMB == False,
-        linksL madrid berlin linkMB == True, linksL berlin madrid linkMB == True, linksL madrid bsas linkMB == False,
+        connectsL madrid linkMB, connectsL berlin linkMB, not (connectsL bsas linkMB),
+        linksL madrid berlin linkMB, linksL berlin madrid linkMB, not (linksL madrid bsas linkMB),
         capacityL linkMB == 1, capacityL linkBBSAS == 2,
         delayL linkMB == 1.0, delayL linkBBSAS == 2.0,
-        connectsT madrid berlin tunelMBSAS == False, connectsT berlin madrid tunelMBSAS == False, connectsT madrid bsas tunelMBSAS == True, connectsT bsas madrid tunelMBSAS == True, connectsT berlin bsas tunelMBSAS == False, connectsT bsas berlin tunelMBSAS == False,
-        usesT linkMB tunelMBSAS == True, usesT linkBBSAS tunelMBSAS == True, usesT linkBM tunelMBSAS == True, usesT linkBSASB tunelMBSAS == True, usesT linkMBSAS tunelMBSAS == False, usesT linkBSASM tunelMBSAS == False,
+        not (connectsT madrid berlin tunelMBSAS), not (connectsT berlin madrid tunelMBSAS), connectsT madrid bsas tunelMBSAS, connectsT bsas madrid tunelMBSAS, not (connectsT berlin bsas tunelMBSAS), not (connectsT bsas berlin tunelMBSAS),
+        usesT linkMB tunelMBSAS, usesT linkBBSAS tunelMBSAS, usesT linkBM tunelMBSAS, usesT linkBSASB tunelMBSAS, not (usesT linkMBSAS tunelMBSAS), not (usesT linkBSASM tunelMBSAS),
         delayT tunelMBSAS == 3.0
         ]
 
