@@ -4,15 +4,7 @@ import Quality
 import Link
 import GHC.Exts.Heap (GenClosure(link))
 import Tunel
-import Region
 
-
-import Point
-import City
-import Quality
-import Link
-import Tunel
-import Region
 
 -- Creación de puntos
 punto1 = newP 1 1

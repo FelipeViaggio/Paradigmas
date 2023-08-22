@@ -12,12 +12,15 @@ data Tunel = Tun [Link] deriving (Eq, Show)
 newT :: [Link] -> Tunel
 newT (link:linkslist) = Tun (link:linkslist)
 
+areExtremes :: City -> City -> Tunel -> Bool
+areExtremes city1 city2 (Tun links) | length links == 1 = linksL city1 city2 (head links)
+                                    | length links > 1 = (connectsL city1 (head (take 2 links)) && not (connectsL city1 (last (take 2 links)))) && 
+                                                         (not (connectsL city2 (head (drop (length links - 2) links))) && connectsL city2 (last (drop (length links -2) links))) ||
+                                                         (connectsL city2 (head (take 2 links)) && not (connectsL city2 (last (take 2 links)))) && 
+                                                         (not (connectsL city1 (head (drop (length links - 2) links))) && connectsL city1 (last (drop (length links -2) links)))
+
 connectsT :: City -> City -> Tunel -> Bool -- indica si este tunel conecta estas dos ciudades distintas
-connectsT city1 city2 (Tun links) | (connectsL city1 (head (take 2 links)) && not (connectsL city1 (last (take 2 links)))) && 
-                                    (not (connectsL city2 (head (drop (length links - 2) links))) && connectsL city2 (last (drop (length links -2) links))) ||
-                                    (connectsL city2 (head (take 2 links)) && not (connectsL city2 (last (take 2 links)))) && 
-                                    (not (connectsL city1 (head (drop (length links - 2) links))) && connectsL city1 (last (drop (length links -2) links))) = True
-                                  | otherwise = False -- Agregar caso de que haya un solo link en el tunel
+connectsT city1 city2 (Tun links) = areExtremes city1 city2 (Tun links)
                                  
       
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
