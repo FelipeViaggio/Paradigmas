@@ -28,9 +28,15 @@ linkBSASM = newL bsas madrid calidad3
 
 tunelMBSAS = newT [linkMB, linkBBSAS]
 
+region1 = newR
+city1 = foundR region1 madrid
+city2 = foundR region1 berlin
+city3 = foundR region1 bsas
 
+primerlink = linkR region1 madrid berlin calidad1
+segundolink = linkR region1 berlin bsas calidad2
 
-
+camino1 = linksForR region1 madrid bsas
 ---------------
 lista = [difP punto1 punto2 == 1.4142135, difP punto1 punto3 == 2.828427, difP punto2 punto3 == 1.4142135,
         nameC madrid == "Madrid", nameC berlin == "Berlin", nameC bsas == "Buenos Aires",
