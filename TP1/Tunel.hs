@@ -17,7 +17,7 @@ connectsT city1 city2 (Tun links) | (connectsL city1 (head (take 2 links)) && no
                                     (not (connectsL city2 (head (drop (length links - 2) links))) && connectsL city2 (last (drop (length links -2) links))) ||
                                     (connectsL city2 (head (take 2 links)) && not (connectsL city2 (last (take 2 links)))) && 
                                     (not (connectsL city1 (head (drop (length links - 2) links))) && connectsL city1 (last (drop (length links -2) links))) = True
-                                  | otherwise = False
+                                  | otherwise = False -- Agregar caso de que haya un solo link en el tunel
                                  
       
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
