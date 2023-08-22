@@ -19,13 +19,6 @@ foundR (Reg cities links tunels) city = Reg (cities ++ [city]) links tunels
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 linkR (Reg cities links tunels) cityA cityB quality = Reg cities (links ++ [newL cityA cityB quality]) tunels
 
-linksForR :: Region -> City -> [Link] -- indica los enlaces que hay que seguir para ir de una ciudad a otra
-linksForR (Reg cities links tunels) city2 = foldr findLinks [] links
-      where 
-         findLinks link acc 
-                           | connectsL city2 link = link : acc
-                           | otherwise = acc
-
 
 tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR (Reg cities links tunels) [city1, city2] = Reg cities links (tunels ++ [newT (linksForR (Reg cities links tunels) city2)])
