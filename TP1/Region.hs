@@ -20,13 +20,13 @@ foundR (Reg cities links tunnels) city
                               | elem (nameC city) (map nameC cities) = error "That city's name already exists"
                               | otherwise = Reg (cities ++ [city]) links tunnels
 
-isRepeatedLink :: [Link] -> City -> City -> Bool
-isRepeatedLink links city1 city2 = any (linksL city1 city2) links
+-- isRepeatedLink :: [Link] -> City -> City -> Bool
+-- isRepeatedLink links city1 city2 = any (linksL city1 city2) links
  
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 linkR (Reg cities links tunnels) cityA cityB quality 
                               | notElem cityA cities || notElem cityB cities = error "At least one city doesn't exist"
-                              | isRepeatedLink links cityA cityB = error "That link already exists"
+                              | linkedR (Reg cities links tunnels) cityA cityB = error "That link already exists"
                               | otherwise = Reg cities (links ++ [newL cityA cityB quality]) tunnels
 
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
