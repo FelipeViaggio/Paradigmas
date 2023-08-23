@@ -16,7 +16,7 @@ newR = Reg [] [] []
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg cities links tunnels) city 
                               | elem city cities = error "That city already exists"
-                              | elem 0 (map (distanceC city) cities) = error "That city's coordinates already exist"
+                              | elem 0 (map distanceC city cities) = error "That city's coordinates already exist"
                               | elem (nameC city) (map nameC cities) = error "That city's name already exists"
                               | otherwise = Reg (cities ++ [city]) links tunnels
 
