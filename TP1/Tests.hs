@@ -4,7 +4,7 @@ import Quality
 import Link
 import GHC.Exts.Heap (GenClosure(link))
 import Tunel
-
+import Region
 
 -- Creación de puntos
 punto1 = newP 1 1
@@ -31,6 +31,9 @@ linkBSASM = newL bsas madrid calidad3
 
 -- Creación de túneles
 tunelMBSAS = newT [linkMB, linkBBSAS]
+
+-- Creación de la región
+region = newR [madrid, berlin, bsas] [linkMB, linkBM, linkBBSAS, linkBSASB, linkMBSAS, linkBSASM] [tunelMBSAS]
 
 ---------------
 lista = [difP punto1 punto2 == 1.4142135, difP punto1 punto3 == 2.828427, difP punto2 punto3 == 1.4142135,
