@@ -5,12 +5,11 @@ import Point
 import City
 import Quality
 import Link
-import GHC.Exts.Heap (GenClosure(link))
 
 data Tunel = Tun [Link] deriving (Eq, Show)
 
 newT :: [Link] -> Tunel
-newT (link:linkslist) = Tun (link:linkslist)
+newT = Tun 
 
 areExtremes :: City -> City -> Tunel -> Bool
 areExtremes city1 city2 (Tun links) | length links == 1 = linksL city1 city2 (head links)

@@ -1,7 +1,6 @@
 module Quality ( Quality, newQ, capacityQ, delayQ )
    where
 
-
 data Quality = Qua String Int Float deriving (Eq, Show)
 
 newQ :: String -> Int -> Float -> Quality

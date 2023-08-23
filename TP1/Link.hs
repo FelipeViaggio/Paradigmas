@@ -14,9 +14,8 @@ connectsL :: City -> Link -> Bool   -- indica si esta ciudad es parte de este li
 connectsL thisCity (Lin cityA cityB quality) = thisCity == cityA || thisCity == cityB 
 
 linksL :: City -> City -> Link -> Bool -- indica si estas dos ciudades distintas estan conectadas mediante este link
-linksL firstCity secondCity (Lin cityA cityB quality) | (firstCity == cityA && secondCity == cityB) || (firstCity == cityB && secondCity == cityA) = True
-                                                      | otherwise = False
-
+linksL firstCity secondCity (Lin cityA cityB quality) = (firstCity == cityA && secondCity == cityB) || (firstCity == cityB && secondCity == cityA)
+                                    
 capacityL :: Link -> Int
 capacityL (Lin cityA cityB quality) = capacityQ quality
 
