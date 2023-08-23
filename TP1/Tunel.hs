@@ -9,7 +9,7 @@ import Link
 data Tunel = Tun [Link] deriving (Eq, Show)
 
 newT :: [Link] -> Tunel
-newT = Tun 
+newT = Tun
 
 areExtremes :: City -> City -> Tunel -> Bool
 areExtremes city1 city2 (Tun links) | length links == 1 = linksL city1 city2 (head links)
