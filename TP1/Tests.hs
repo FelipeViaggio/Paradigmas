@@ -43,7 +43,7 @@ lista = [difP punto1 punto2 == 1.4142135, difP punto1 punto3 == 2.828427, difP p
         capacityL linkMB == 1, capacityL linkBBSAS == 2,
         delayL linkMB == 1.0, delayL linkBBSAS == 2.0,
         not (connectsT madrid berlin tunelMBSAS), not (connectsT berlin madrid tunelMBSAS), connectsT madrid bsas tunelMBSAS, connectsT bsas madrid tunelMBSAS, not (connectsT berlin bsas tunelMBSAS), not (connectsT bsas berlin tunelMBSAS),
-        usesT linkMB tunelMBSAS, usesT linkBBSAS tunelMBSAS, usesT linkBM tunelMBSAS, usesT linkBSASB tunelMBSAS, not (usesT linkMBSAS tunelMBSAS), not (usesT linkBSASM tunelMBSAS),
+        usesT linkMB tunelMBSAS, usesT linkBBSAS tunelMBSAS, not (usesT linkBM tunelMBSAS), not (usesT linkBSASB tunelMBSAS), not (usesT linkMBSAS tunelMBSAS), not (usesT linkBSASM tunelMBSAS),
         delayT tunelMBSAS == 3.0
         ]
 

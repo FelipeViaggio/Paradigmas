@@ -27,8 +27,7 @@ connectsT city1 city2 (Tun links) = areExtremes city1 city2 (Tun links)
                                  
       
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
-usesT link (Tun linkslist) = True-- | elem link linkslist || reverseLink elem link linkslist = True
-                           -- | otherwise = False
+usesT link (Tun linkslist) = elem link linkslist
                            
 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
