@@ -34,7 +34,7 @@ linkBSASM = newL bsas madrid calidad3
 tunelMBSAS = newT [linkMB, linkBBSAS]
 
 -- Creación de la región
-region = linkR (linkR (foundR (foundR (foundR newR madrid) berlin) bsas) madrid berlin calidad1) berlin bsas calidad2
+region = tunelR (linkR (linkR (foundR (foundR (foundR newR madrid) berlin) bsas) madrid berlin calidad1) berlin bsas calidad2) [madrid, berlin, bsas]
 
 ---------------
 lista = [connectedR region madrid bsas, not (connectedR region madrid berlin), not (connectedR region berlin bsas),
