@@ -10,6 +10,7 @@ import Region
 punto1 = newP 1 1
 punto2 = newP 2 2
 punto3 = newP 3 3
+punto4 = newP 4 4
 
 -- Creación de ciudades
 madrid = newC "Madrid" punto1
@@ -33,7 +34,7 @@ linkBSASM = newL bsas madrid calidad3
 tunelMBSAS = newT [linkMB, linkBBSAS]
 
 -- Creación de la región
-region1 = foundR newR madrid
+region = tunelR (linkR (linkR (foundR (foundR (foundR newR madrid) berlin) bsas) madrid berlin calidad1) berlin bsas calidad2) [madrid, berlin, bsas]
 
 ---------------
 lista = [connectedR region madrid bsas, not (connectedR region madrid berlin), not (connectedR region berlin bsas),
