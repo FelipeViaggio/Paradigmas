@@ -33,21 +33,13 @@ linkBSASM = newL bsas madrid calidad3
 tunelMBSAS = newT [linkMB, linkBBSAS]
 
 -- Creación de la región
-region = newR [madrid, berlin, bsas] [linkMB, linkBM, linkBBSAS, linkBSASB, linkMBSAS, linkBSASM] [tunelMBSAS]
+region1 = foundR newR madrid
 
 ---------------
-lista = [difP punto1 punto2 == 1.4142135, difP punto1 punto3 == 2.828427, difP punto2 punto3 == 1.4142135,
-        nameC madrid == "Madrid", nameC berlin == "Berlin", nameC bsas == "Buenos Aires",
-        distanceC madrid berlin == 1.4142135, distanceC berlin bsas == 1.4142135, distanceC madrid bsas == 2.828427,
-        capacityQ calidad1 == 1, capacityQ calidad2 == 2,
-        delayQ calidad1 == 1.0, delayQ calidad2 == 2.0,
-        connectsL madrid linkMB, connectsL berlin linkMB, not (connectsL bsas linkMB),
-        linksL madrid berlin linkMB, linksL berlin madrid linkMB, not (linksL madrid bsas linkMB),
-        capacityL linkMB == 1, capacityL linkBBSAS == 2,
-        delayL linkMB == 1.0, delayL linkBBSAS == 2.0,
-        not (connectsT madrid berlin tunelMBSAS), not (connectsT berlin madrid tunelMBSAS), connectsT madrid bsas tunelMBSAS, connectsT bsas madrid tunelMBSAS, not (connectsT berlin bsas tunelMBSAS), not (connectsT bsas berlin tunelMBSAS),
-        usesT linkMB tunelMBSAS, usesT linkBBSAS tunelMBSAS, not (usesT linkBM tunelMBSAS), not (usesT linkBSASB tunelMBSAS), not (usesT linkMBSAS tunelMBSAS), not (usesT linkBSASM tunelMBSAS),
-        delayT tunelMBSAS == 3.0
+lista = [connectedR region madrid bsas, not (connectedR region madrid berlin), not (connectedR region berlin bsas),
+         linkedR region madrid berlin, linkedR region berlin bsas, not (linkedR region madrid bsas),
+         delayR region madrid bsas == 3.0,
+         availableCapacityForR region madrid berlin == 0, availableCapacityForR region berlin bsas == 1
         ]
 
 main = print lista
