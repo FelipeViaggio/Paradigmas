@@ -25,7 +25,7 @@ foundR (Reg cities links tunnels) city
  
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 linkR (Reg cities links tunnels) cityA cityB quality 
-                              | notElem cityA cities || notElem cityB cities = error "At least one city doesn't exist!"
+                              | notElem cityA cities || notElem cityB cities = error "At least one city doesn't exist"
                               | linkedR (Reg cities links tunnels) cityA cityB = error "That link already exists"
                               | otherwise = Reg cities (links ++ [newL cityA cityB quality]) tunnels
 
@@ -41,7 +41,7 @@ linksForTunnel links (city:cities)  | length (city:cities) == 1 = []
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR (Reg regionCities links tunels) (city:cities) | length (city:cities) == 1 = error "You need at least two cities"
                                                      | availableCapacityForR (Reg regionCities links tunels) city (head cities) == 0 = error "There's no available capacity"
-                                                     | notElem city regionCities = error "At least one city doesn't exist?"
+                                                     | notElem city regionCities = error "At least one city doesn't exist!"
                                                      | otherwise = Reg cities links (tunels ++ [newT (linksForTunnel links (city:cities))])
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
@@ -65,5 +65,5 @@ usedCapacityforR link tunnels = countingTrues [usesT link tunnel | tunnel <- tun
 
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 availableCapacityForR (Reg cities links tunnels) city1 city2 
-                         | notElem city1 cities || notElem city2 cities = error "At least one city doesn't exist"
+                         | notElem city1 cities || notElem city2 cities = error "At least one city doesn't exist!!"
                          | otherwise = capacityL (linkSearch links city1 city2) - usedCapacityforR (linkSearch links city1 city2) tunnels
