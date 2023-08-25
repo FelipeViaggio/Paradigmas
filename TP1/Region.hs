@@ -38,11 +38,16 @@ linksForTunnel :: [Link] -> [City] -> [Link]
 linksForTunnel links (city:cities)  | length (city:cities) == 1 = []
                                     | otherwise = linkSearch links city (head cities) : linksForTunnel links cities
 
+areThelinksFull :: Region -> [City] -> Bool
+areThelinksFull (Reg regionCities links tunnels) (city:cities) | length (city:cities) == 1 = True
+                                                         | availableCapacityForR (Reg regionCities links tunnels) city (head cities) > 0 = areThelinksFull (Reg regionCities links tunnels) cities
+                                                         | otherwise = error "There's no available capacity"
+
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR (Reg regionCities links tunnels) (city:cities) | length (city:cities) == 1 = error "You need at least two cities"
-                                                     | availableCapacityForR (Reg regionCities links tunnels) city (head cities) == 0 = error "There's no available capacity"
-                                                     | notElem city regionCities = error "At least one city doesn't exist!"
-                                                     | otherwise = Reg cities links (tunnels ++ [newT (linksForTunnel links (city:cities))])
+                                                      | areThelinksFull (Reg regionCities links tunnels) (city:cities) = Reg regionCities links (tunnels ++ [newT (linksForTunnel links (city:cities))])
+                                                      | otherwise = error "It was not able to create the tunnel"
+                           
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 connectedR (Reg cities links tunnels) city1 city2 = any (connectsT city1 city2) tunnels
