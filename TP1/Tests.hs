@@ -37,7 +37,9 @@ tunelMBSAS = newT [linkMB, linkBBSAS]
 region = tunelR (linkR (linkR (foundR (foundR (foundR newR madrid) berlin) bsas) madrid berlin calidad1) berlin bsas calidad2) [madrid, berlin, bsas]
 
 ---------------
-lista = [connectedR region madrid bsas, not (connectedR region madrid berlin), not (connectedR region berlin bsas),
+
+lista = [
+         connectedR region madrid bsas, not (connectedR region madrid berlin), not (connectedR region berlin bsas),
          linkedR region madrid berlin, linkedR region berlin bsas, not (linkedR region madrid bsas),
          delayR region madrid bsas == 3.0,
          availableCapacityForR region madrid berlin == 0, availableCapacityForR region berlin bsas == 1
