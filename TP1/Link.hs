@@ -20,4 +20,24 @@ capacityL :: Link -> Int
 capacityL (Lin cityA cityB quality) = capacityQ quality
 
 delayL :: Link -> Float     -- la demora que sufre una conexion en este canal
-delayL (Lin cityA cityB  quality) = delayQ quality
+delayL (Lin cityA cityB quality) = (delayQ quality) * (distanceC cityA cityB)
+
+-- Pruebas
+
+link1 = newL (newC "city1" (newP 1 1)) (newC "city2" (newP 2 2)) (newQ "c1" 1 1.0)
+link2 = newL (newC "city3" (newP 3 3)) (newC "city4" (newP 4 4)) (newQ "c2" 2 2.0)
+
+lista = [
+         connectsL (newC "city1" (newP 1 1)) link1,
+         connectsL (newC "city2" (newP 2 2)) link1,
+         not (connectsL (newC "city3" (newP 3 3)) link1),
+         not (connectsL (newC "city4" (newP 4 4)) link1),
+         linksL (newC "city1" (newP 1 1)) (newC "city2" (newP 2 2)) link1,
+         linksL (newC "city2" (newP 2 2)) (newC "city1" (newP 1 1)) link1,
+         not (linksL (newC "city3" (newP 3 3)) (newC "city4" (newP 4 4)) link1),
+         not (linksL (newC "city4" (newP 4 4)) (newC "city3" (newP 3 3)) link1),
+         capacityL link1 == 1,
+         capacityL link2 == 2,
+         delayL link1 == sqrt(2), -- 1 * sqrt(2)
+         delayL link2 == 2 * sqrt(2) -- 2 * sqrt(2)
+            ]
