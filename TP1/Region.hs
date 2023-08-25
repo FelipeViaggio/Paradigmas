@@ -19,9 +19,6 @@ foundR (Reg cities links tunnels) city
                               | elem 0 (map (distanceC city) cities) = error "That city's coordinates already exist"
                               | elem (nameC city) (map nameC cities) = error "That city's name already exists"
                               | otherwise = Reg (cities ++ [city]) links tunnels
-
--- isRepeatedLink :: [Link] -> City -> City -> Bool
--- isRepeatedLink links city1 city2 = any (linksL city1 city2) links
  
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 linkR (Reg cities links tunnels) cityA cityB quality 
