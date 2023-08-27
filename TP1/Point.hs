@@ -27,10 +27,10 @@ difPtest = difP point1 point2
 lista = [
          substractiontest == newP (-1) (-1),
          substractiontest /= newP 1 1,
-         normtest == sqrt(2),
-         normtest /= sqrt(4),
-         normtest2 == sqrt(8),
-         normtest2 /= sqrt(2),
-         difPtest == sqrt(2), 
-         difPtest /= sqrt(4)
+         normtest == sqrt 2,
+         normtest /= sqrt 4,
+         normtest2 == sqrt 8,
+         normtest2 /= sqrt 2,
+         difPtest == sqrt 2, 
+         difPtest /= sqrt 4
         ]

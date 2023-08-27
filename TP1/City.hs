@@ -29,6 +29,6 @@ lista = [
          nameCtest /= "city2",
          nameCtest2 == "city2",
          nameCtest2 /= "city1",
-         distanceCtest == sqrt(2),
-         distanceCtest /= sqrt(4)
+         distanceCtest == sqrt 2,
+         distanceCtest /= sqrt 4
          ]
