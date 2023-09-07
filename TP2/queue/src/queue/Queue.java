@@ -1,59 +1,39 @@
 package queue;
 
-public class Queue {
-	private int usedcapacity = 0;
+import java.util.ArrayList;
+import java.util.List;
 
-	private Object[] elements = new Object[10];
+public class Queue<queuethings> {
+	private final List<queuethings> elements = new ArrayList<>();
+
 	public boolean isEmpty() {
-		return usedcapacity == 0;
+		return elements.isEmpty();
 	}
 
-	public Queue add( Object newElement ) {
-		if (usedcapacity < capacity()){
-			elements[usedcapacity] = newElement;
-			usedcapacity++;
-		} else {
-			System.out.println("Queue is full");
-		}
+	public Queue<queuethings> add(queuethings newElement) {
+		elements.add(newElement);
 		return this;
 	}
 
-	private int capacity() {
-		return elements.length;
-	}
-
-	public Object take() {
-		if (isEmpty()){
+	public queuethings take() {
+		if (isEmpty()) {
 			throw new Error("Queue is empty");
 		} else {
-			Object firstElement = elements[0];
-			moveforward(0);
-
+			queuethings firstElement = elements.get(0);
+			elements.remove(0);
 			return firstElement;
 		}
 	}
 
-	private void moveforward(int index) {
-		if (index < usedcapacity){
-			elements[index] = elements[index + 1];
-			moveforward(index + 1);
-		} else {
-			elements[usedcapacity - 1] = null;
-			usedcapacity--;
-		}
-	}
-
-
-	public Object head() {
-		if (!isEmpty()){
-			return elements[0];
-		} else {
-			throw new Error("Queue is empty");
-		}
-	}
-
 	public int size() {
-		return usedcapacity;
+		return elements.size();
 	}
 
+	public queuethings head() {
+		if (isEmpty()) {
+			throw new Error("Queue is empty");
+		} else {
+			return elements.get(0);
+		}
+	}
 }
