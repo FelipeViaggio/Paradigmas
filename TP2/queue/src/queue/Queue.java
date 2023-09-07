@@ -5,7 +5,6 @@ public class Queue {
 
 	private Object[] elements = new Object[10];
 	public boolean isEmpty() {
-
 		return usedcapacity == 0;
 	}
 
