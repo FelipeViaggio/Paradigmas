@@ -3,37 +3,37 @@ package queue;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Queue<queuethings> {
-	private final List<queuethings> elements = new ArrayList<>();
+public class Queue {
+	static public String emptyQueueError = "Queue is empty";
+
+	private final List queue = new ArrayList();
+
+	private BasicQueue elements = new EmptyQueue();
 
 	public boolean isEmpty() {
-		return elements.isEmpty();
+		return queue.isEmpty();
 	}
 
-	public Queue<queuethings> add(queuethings newElement) {
-		elements.add(newElement);
+	public Queue add(String newElement) {
+		this.queue.add(newElement);
+		this.elements = new NotEmptyQueue();
 		return this;
 	}
 
-	public queuethings take() {
-		if (isEmpty()) {
-			throw new Error("Queue is empty");
-		} else {
-			queuethings firstElement = elements.get(0);
-			elements.remove(0);
-			return firstElement;
-		}
-	}
-
 	public int size() {
-		return elements.size();
+		return queue.size();
 	}
 
-	public queuethings head() {
-		if (isEmpty()) {
-			throw new Error("Queue is empty");
-		} else {
-			return elements.get(0);
-		}
+	public Object take() {
+		return this.queue.remove(0);
+	}
+
+	public Object take2() {
+		return elements.take2( this );
+	}
+
+	public Object head() {
+
+		return this.queue.get(0);
 	}
 }
