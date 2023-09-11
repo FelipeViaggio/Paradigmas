@@ -55,5 +55,4 @@ public class Queue {
     public int size() {
         return getPosition();
     }
-    //hola
 }
