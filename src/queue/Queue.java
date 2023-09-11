@@ -1,35 +1,35 @@
 package queue;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Queue {
     static public String emptyQueueError = "Queue is empty";
 
-    private List queue = new ArrayList<Object> ();
+    private final ArrayList<BasicQueue> queue = new ArrayList<>();
 
-    private BasicQueue elements = new EmptyQueue();
-
-    public boolean isEmpty() {
-        return queue.isEmpty();
+    public Queue(){
+        this.queue.add(new EmptyQueue());
     }
 
-    public Queue add(String newElement) {
-        this.queue.add(newElement);
-        this.elements = new NotEmptyQueue();
+    public boolean isEmpty() {
+        return getState(this.queue.size()-1).isEmpty();
+    }
+
+     private BasicQueue getState(int position) {
+        return (BasicQueue) this.queue.get(position);
+    }
+
+    public Queue add(Object newElement) {
+        this.queue.add(new NotEmptyQueue(newElement));
         return this;
     }
 
-    public int size() {
-        return queue.size();
-    }
-
     public Object take() {
-        return elements.take( this );
+        return getState(this.queue.size()-1).take(this);
     }
 
     public Object head() {
-        return elements.head( this );
+        return getState(this.queue.size()-1).head(this);
     }
 
     public Object error() {
@@ -37,11 +37,16 @@ public class Queue {
     }
 
     public Object notEmptyhead() {
-
-        return this.queue.get(0);
+        return getState(1).getObject( this );
     }
 
     public Object notEmptytake() {
-        return this.queue.remove(0);
+        Object firstElement = getState(1).getObject(this);
+        this.queue.remove(1);
+        return firstElement;
+    }
+
+    public int size() {
+        return this.queue.size()-1;
     }
 }

@@ -2,12 +2,23 @@ package queue;
 
 public class NotEmptyQueue extends BasicQueue {
 
-    @Override
-    public Object take(Queue queue) {
-        return queue.isEmpty() ? queue.error() : queue.notEmptytake();
+    public Object object;
+    public NotEmptyQueue(Object object) {
+        this.object = object;
     }
 
-    @Override
+    public Object getObject(Queue queue) {
+        return this.object;
+    }
+
+    public boolean isEmpty() {
+        return false;
+    }
+
+    public Object take(Queue queue) {
+        return queue.notEmptytake();
+    }
+
     public Object head(Queue queue) {
         return queue.notEmptyhead();
     }
