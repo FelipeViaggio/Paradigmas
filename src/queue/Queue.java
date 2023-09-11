@@ -3,6 +3,11 @@ package queue;
 import java.util.ArrayList;
 
 public class Queue {
+
+    private int getPosition() {
+        return this.queue.size() - 1;
+    }
+
     static public String emptyQueueError = "Queue is empty";
 
     private final ArrayList<BasicQueue> queue = new ArrayList<>();
@@ -12,10 +17,11 @@ public class Queue {
     }
 
     public boolean isEmpty() {
-        return getState(this.queue.size()-1).isEmpty();
+        return getState(getPosition()).isEmpty();
     }
 
-     private BasicQueue getState(int position) {
+
+    private BasicQueue getState(int position) {
         return (BasicQueue) this.queue.get(position);
     }
 
@@ -25,11 +31,11 @@ public class Queue {
     }
 
     public Object take() {
-        return getState(this.queue.size()-1).take(this);
+        return getState(getPosition()).take(this);
     }
 
     public Object head() {
-        return getState(this.queue.size()-1).head(this);
+        return getState(getPosition()).head(this);
     }
 
     public Object error() {
@@ -47,6 +53,7 @@ public class Queue {
     }
 
     public int size() {
-        return this.queue.size()-1;
+        return getPosition();
     }
+
 }
