@@ -8,7 +8,7 @@ public class Queue {
 
     static public String emptyQueueError = "Queue is empty";
 
-    private final ArrayList<BasicQueue> queue = new ArrayList<>();
+    private ArrayList<BasicQueue> queue = new ArrayList<>();
 
     public Queue(){
         this.queue.add(new EmptyQueue());
