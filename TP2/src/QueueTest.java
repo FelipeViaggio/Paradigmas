@@ -1,22 +1,26 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class QueueTest {
-
     private Queue queue = new Queue();
     @BeforeEach
-    public void init() { this.queue = new Queue();}
+    public void init() {
+        this.queue = new Queue();
+    }
 
     @Test
-    public void test01QueueShouldBeEmptyWhenCreated() { assertTrue(queue.isEmpty());}
+    public void test01QueueShouldBeEmptyWhenCreated() {
+        assertTrue(queue.isEmpty());
+    }
 
     @Test
     public void test02AddElementsToTheQueue() {
-        assertFalse(queue.add(something()).isEmpty());
+        assertFalse(queue.add(StringSomething()).isEmpty());
     }
 
     @Test
@@ -31,26 +35,29 @@ public class QueueTest {
     }
 
     @Test
-    public void test05TakeReturnsLastAddedObject() { assertEquals(something(), queue.add(something()).take()); }
+    public void test05TakeReturnsLastAddedObject() {
+        assertEquals(StringSomething(),
+                queue.add(StringSomething()).take());
+    }
 
     @Test
     public void test06QueueBehavesFIFO() {
         QueueWithFirstandSecondStrings();
 
-        assertEquals(queue.take(), First());
-        assertEquals(queue.take(), Second());
+        assertEquals(queue.take(), StringFirst());
+        assertEquals(queue.take(), StringSecond());
         assertTrue(queue.isEmpty());
     }
 
     @Test
     public void test07HeadReturnsFirstAddedObject() {
         QueueWithFirstandSecondStrings();
-        assertEquals(First(), queue.head());
+        assertEquals(StringFirst(), queue.head());
     }
 
     @Test
     public void test08HeadDoesNotRemoveObjectFromQueue() {
-        assertEquals(1, queue.add(something()).size());
+        assertEquals(1, queue.add(StringSomething()).size());
 
         queue.head();
 
@@ -64,30 +71,40 @@ public class QueueTest {
 
     @Test
     public void test10CanNotTakeWhenThereAreNoObjectsInTheQueue() {
-        assertEquals(Queue.EMPTY_QUEUE_ERROR, assertThrows( Error.class, () -> queue.take() ).getMessage());
+        assertThrowsLike(Queue.EMPTY_QUEUE_ERROR, () -> queue.take());
     }
 
     @Test
     public void test11CanNotTakeWhenThereAreNoObjectsInTheQueueAndTheQueueHadObjects() {
-        queue.add(something());
+        queue.add(StringSomething());
         queue.take();
-        assertEquals(Queue.EMPTY_QUEUE_ERROR, assertThrows( Error.class, () -> queue.take() ).getMessage());
+        assertThrowsLike(Queue.EMPTY_QUEUE_ERROR, () -> queue.take());
     }
 
     @Test
     public void test12CanNotHeadWhenThereAreNoObjectsInTheQueue() {
-        assertEquals(Queue.EMPTY_QUEUE_ERROR, assertThrows( Error.class, () -> new Queue().head() ).getMessage());
+        assertThrowsLike(Queue.EMPTY_QUEUE_ERROR, () -> queue.head());
     }
+
     private Queue QueueWithFirstandSecondStrings() {
-        queue.add(First());
-        queue.add(Second());
+        queue.add(StringFirst());
+        queue.add(StringSecond());
         return this.queue;
     }
 
-    private String something(){return "Something";};
-    private String First(){return "First";};
-    private String Second(){return "Second";};
+    private void assertThrowsLike(String expectedErrorMessage, Executable toBeEvaluated) {
+        assertEquals(expectedErrorMessage, assertThrows(Error.class, toBeEvaluated).getMessage());
+    }
 
+    private String StringSomething() {
+        return "Something";
+    }
 
+    private String StringFirst() {
+        return "First";
+    }
 
+    private String StringSecond() {
+        return "Second";
+    }
 }

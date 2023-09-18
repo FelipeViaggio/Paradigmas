@@ -27,5 +27,5 @@ public class Queue {
 
     public int size() { return this.queue.size() - 1; }
 
-    private BasicQueue getLastState() { return (BasicQueue) this.queue.get(0); }
+    private BasicQueue getLastState() { return this.queue.get(0); }
 }
