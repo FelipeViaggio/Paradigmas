@@ -24,11 +24,14 @@ public class QueueTest {
     }
 
     @Test
-    public void test03AddedElementsIsAtHead() { assertEquals(something(), queue.add(something()).head()); }
+    public void test03AddedElementsIsAtHead() {
+        assertEquals(StringSomething(),
+                queue.add(StringSomething()).head());
+    }
 
     @Test
     public void test04TakeRemovesElementsFromTheQueue() {
-        queue.add(something());
+        queue.add(StringSomething());
         queue.take();
 
         assertTrue(queue.isEmpty());
