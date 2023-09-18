@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Queue {
-    static public String emptyQueueError = "Queue is empty";
+    static public String EMPTY_QUEUE_ERROR = "Queue is empty";
     private ArrayList<BasicQueue> queue = new ArrayList<>();
 
     public Queue(){ this.queue.add(new EmptyQueue()); }
@@ -23,7 +23,7 @@ public class Queue {
 
     public Object head() { return getLastState().head(this); }
 
-    public Object error() { throw new Error( emptyQueueError ); }
+    public Object error() { throw new Error( EMPTY_QUEUE_ERROR ); }
 
     public int size() { return this.queue.size() - 1; }
 
