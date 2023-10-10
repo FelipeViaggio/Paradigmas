@@ -16,7 +16,8 @@ public class Tests {
 
     @Test
     public void test02ShouldStartLookingToNorth(){
-        assertEquals( "NORTH", new Nemo().getDirection() );
+        Nemo nemo = new Nemo();
+        assertEquals( "North", nemo.getDirection().getDirectionString() );
     }
 
     @Test

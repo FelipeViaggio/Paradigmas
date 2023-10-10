@@ -1,75 +1,81 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Nemo {
     private int x = 0;
     private int y = 0;
     private int z = 0;
-    private String direction = "NORTH";
+    private Direction direction = new North();
 
-    public int[] getPosition() { return new int[]{x, y}; }
+    public int[] getPosition() {
+        return new int[]{x, y};
+    }
 
-    public boolean isOnSurface() { return z == 0; }
+    public boolean isOnSurface() {
+        return z == 0;
+    }
 
-    public int getDepth() { return z; }
+    public int getDepth() {
+        return z;
+    }
 
-    public String getDirection() { return direction; }
+    public Direction getDirection() {
+        return direction;
+    }
 
-    public void move( String orders ) {
-        if ( orders.equals("")) {
+    public void ascend() {
+        if (z == 0) {
             return;
         }
-        for ( int i = 0; i < orders.length(); i++) {
-            char order = orders.charAt(i);
-            if ( order == 'd' ) {
-                z++;
-            }
-            else if ( order == 'u') {
-                if ( z == 0 ) {
-                    continue;
-                }
-                z--;
-            }
-            else if ( order == 'f' ) {
-                if ( direction.equals( "NORTH" ) ) {
-                    y++;
-                }
-                else if ( direction.equals( "SOUTH" ) ) {
-                    y--;
-                }
-                else if ( direction.equals( "EAST" ) ) {
-                    x++;
-                }
-                else if ( direction.equals( "WEST" ) ) {
-                    x--;
-                }
-            }
-            else if ( order == 'l' ) {
-                if ( direction.equals( "NORTH" ) ) {
-                    direction = "WEST";
-                }
-                else if ( direction.equals( "SOUTH" ) ){
-                    direction = "EAST";
-                }
-                else if ( direction.equals( "EAST" ) ) {
-                    direction = "NORTH";
-                }
-                else if ( direction.equals( "WEST" ) ) {
-                    direction = "SOUTH";
-                }
-            }
-            else if ( order == 'r' ) {
-                if ( direction.equals( "NORTH" ) ) {
-                    direction = "EAST";
-                }
-                else if ( direction.equals( "SOUTH" ) ) {
-                    direction = "WEST";
-                }
-                else if ( direction.equals( "EAST" ) ) {
-                    direction = "SOUTH";
-                }
-                else if ( direction.equals( "WEST" ) ) {
-                    direction = "NORTH";
-                }
-            }
+        z--;
+    }
 
+    public void descend() {
+        z++;
+    }
+
+    public void incrementY() {
+        y++;
+    }
+
+    public void decrementY() {
+        y--;
+    }
+
+    public void incrementX() {
+        x++;
+    }
+
+    public void decrementX() {
+        x--;
+    }
+
+    public void moveForward() {
+        direction.moveForward(this);
+    }
+
+    public void turnLeft() {
+        direction = direction.turnLeft();
+    }
+
+    public void turnRight() {
+        direction = direction.turnRight();
+    }
+
+
+    public void move(String orders) {
+        Map<Character, Command> commands = new HashMap<>();
+        commands.put('d', new Descend());
+        commands.put('u', new Ascend());
+        commands.put('f', new MoveForward());
+        commands.put('l', new TurnLeft());
+        commands.put('r', new TurnRight());
+
+        for (char order : orders.toCharArray()) {
+            Command command = commands.get(order);
+            if (command != null) {
+                command.execute(this);
+            }
         }
     }
 }
