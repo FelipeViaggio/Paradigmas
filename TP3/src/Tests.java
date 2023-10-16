@@ -16,15 +16,14 @@ public class Tests {
 
     @Test
     public void test02ShouldStartLookingToNorth(){
-        Nemo nemo = new Nemo();
-        assertEquals( "North", nemo.getDirection().getDirectionString() );
+        assertEquals( "North", new Nemo().getDirection().getDirectionString() );
     }
 
     @Test
     public void test03ShouldNotMoveIfNoOrderGiven(){
         Nemo nemo = new Nemo();
         nemo.move( "" );
-        assertArrayEquals( new int[]{0, 0}, new Nemo().getPosition() );
+        assertArrayEquals( new int[]{0, 0}, nemo.getPosition() );
     }
 
     @Test
