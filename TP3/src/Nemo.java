@@ -62,6 +62,12 @@ public class Nemo {
         direction = direction.turnRight();
     }
 
+    public String launchCapsule() {
+        if (z <= 1) {
+            return "Capsule launched!";
+        }
+        throw new RuntimeException( "Cannot launch capsule at this depth, Nemo exploded!" );
+    }
 
     public void move(String orders) {
         Map<Character, Command> commands = new HashMap<>();
@@ -70,6 +76,7 @@ public class Nemo {
         commands.put('f', new MoveForward());
         commands.put('l', new TurnLeft());
         commands.put('r', new TurnRight());
+        commands.put('m', new Capsule());
 
         for (char order : orders.toCharArray()) {
             Command command = commands.get(order);
@@ -78,6 +85,5 @@ public class Nemo {
             }
         }
     }
-}
 
-// PRUEBA
+}
