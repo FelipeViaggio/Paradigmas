@@ -1,9 +1,12 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class Nemo {
-//    public int x = 0;
-//    public int y = 0;
+    private ArrayList<DepthState> depthStatesList = new ArrayList<>();
+
     public int z = 0;
     private Direction direction = new North();
     private static final List<Command> commands = Arrays.asList(
@@ -13,6 +16,21 @@ public class Nemo {
             new TurnLeft(),
             new TurnRight()
     );
+
+    public Nemo() {
+        this.depthStatesList.add( new Surface() );
+    }
+    public Nemo ascend() {
+        DepthState currentState = this.depthStatesList.get( this.depthStatesList.size() - 1 );
+        currentState.ascend( this );
+        return this;
+    }
+
+    public Nemo descend() {
+        DepthState currentState = this.depthStatesList.get( this.depthStatesList.size() - 1 );
+        currentState.descend( this );
+        return this;
+    }
 
     public int[] getPosition() {
         return new int[]{ Coordenate.x, Coordenate.y};
@@ -30,32 +48,17 @@ public class Nemo {
         return direction;
     }
 
-    public void ascend() {
-        if (z == 0) {
-            return;
-        }
-        z--;
-    }
+//    public void ascend() {
+//        if (z == 0) {
+//            return;
+//        }
+//        z--;
+//    }
 
-    public void descend() {
-        z++;
-    }
+//    public void descend() {
+//        z++;
+//    }
 
-//    public void incrementY() {
-//        y++;
-//    }
-//
-//    public void decrementY() {
-//        y--;
-//    }
-//
-//    public void incrementX() {
-//        x++;
-//    }
-//
-//    public void decrementX() {
-//        x--;
-//    }
 
     public void moveForward() {
         direction.moveForward(this);
