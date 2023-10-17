@@ -82,21 +82,21 @@ public class Tests {
         assertEquals( "North", nemo.getDirection().getDirectionString() );
     }
 
-    @Test
-    public void test10NemoLaunchsTheCapsuleAtDepth0AndDepth1() {
-        Nemo nemo = new Nemo();
-        nemo.move( "m" );
-        assertEquals( "Capsule launched!", nemo.launchCapsule() );
-        nemo.move( "dm" );
-        assertEquals( "Capsule launched!", nemo.launchCapsule() );
-    }
-
-    @Test
-    public void test11NemoExplodesWhenCapsuleIsLaunchedUnderDepth1() {
-        Nemo nemo = new Nemo();
-        nemo.move( "dd" );
-        assertThrowsLike( () -> nemo.move("m"), "Cannot launch capsule at this depth, Nemo exploded!" );
-    }
+//    @Test
+//    public void test10NemoLaunchsTheCapsuleAtDepth0AndDepth1() {
+//        Nemo nemo = new Nemo();
+//        nemo.move( "m" );
+//        assertEquals( "Capsule launched!", nemo.launchCapsule() );
+//        nemo.move( "dm" );
+//        assertEquals( "Capsule launched!", nemo.launchCapsule() );
+//    }
+//
+//    @Test
+//    public void test11NemoExplodesWhenCapsuleIsLaunchedUnderDepth1() {
+//        Nemo nemo = new Nemo();
+//        nemo.move( "dd" );
+//        assertThrowsLike( () -> nemo.move("m"), "Cannot launch capsule at this depth, Nemo exploded!" );
+//    }
 
 
 

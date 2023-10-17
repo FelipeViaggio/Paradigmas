@@ -2,9 +2,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Nemo {
-    private int x = 0;
-    private int y = 0;
-    private int z = 0;
+//    public int x = 0;
+//    public int y = 0;
+    public int z = 0;
     private Direction direction = new North();
     private static final List<Command> commands = Arrays.asList(
             new Descend(),
@@ -15,7 +15,7 @@ public class Nemo {
     );
 
     public int[] getPosition() {
-        return new int[]{x, y};
+        return new int[]{ Coordenate.x, Coordenate.y};
     }
 
     public boolean isOnSurface() {
@@ -41,21 +41,21 @@ public class Nemo {
         z++;
     }
 
-    public void incrementY() {
-        y++;
-    }
-
-    public void decrementY() {
-        y--;
-    }
-
-    public void incrementX() {
-        x++;
-    }
-
-    public void decrementX() {
-        x--;
-    }
+//    public void incrementY() {
+//        y++;
+//    }
+//
+//    public void decrementY() {
+//        y--;
+//    }
+//
+//    public void incrementX() {
+//        x++;
+//    }
+//
+//    public void decrementX() {
+//        x--;
+//    }
 
     public void moveForward() {
         direction.moveForward(this);
