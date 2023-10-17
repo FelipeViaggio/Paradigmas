@@ -1,11 +1,18 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 public class Nemo {
     private int x = 0;
     private int y = 0;
     private int z = 0;
     private Direction direction = new North();
+    private static final List<Command> commands = Arrays.asList(
+            new Descend(),
+            new Ascend(),
+            new MoveForward(),
+            new TurnLeft(),
+            new TurnRight()
+    );
 
     public int[] getPosition() {
         return new int[]{x, y};
@@ -62,20 +69,14 @@ public class Nemo {
         direction = direction.turnRight();
     }
 
-
     public void move(String orders) {
-        Map<Character, Command> commands = new HashMap<>();
-        commands.put('d', new Descend());
-        commands.put('u', new Ascend());
-        commands.put('f', new MoveForward());
-        commands.put('l', new TurnLeft());
-        commands.put('r', new TurnRight());
-
-        for (char order : orders.toCharArray()) {
-            Command command = commands.get(order);
-            if (command != null) {
-                command.execute(this);
-            }
-        }
+        orders.chars()
+                .mapToObj(c -> (char) c)
+                .forEach(order -> {
+                    commands.stream()
+                            .filter(command -> command.matches(order))
+                            .findFirst()
+                            .ifPresent(command -> command.execute(this));
+                });
     }
 }

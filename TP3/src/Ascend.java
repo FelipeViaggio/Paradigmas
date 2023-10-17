@@ -3,4 +3,10 @@ public class Ascend extends Command{
     public void execute(Nemo nemo) {
         nemo.ascend();
     }
+
+    @Override
+    public boolean matches(char order) {
+        return order == 'u';
+    }
+
 }
