@@ -32,11 +32,11 @@ public class Nemo {
 
     public boolean isOnSurface() {
         return (depthState.size() - 1 == 0);
-    } // ARREGLAR
+    }
 
     public int getDepth() {
         return depthState.size() - 1;
-    } // ARREGLAR
+    }
 
     public Direction getDirection() {
         return direction;
@@ -89,7 +89,7 @@ public class Nemo {
     }
 
     public Object error() {
-        throw new Error( NEMO_EXPLODED );
+        throw new RuntimeException( NEMO_EXPLODED );
     }
 }
 

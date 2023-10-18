@@ -20,6 +20,6 @@ public class South extends Direction {
 
     @Override
     public String getDirectionString() {
-        return "Directions.South";
+        return "South";
     }
 }
