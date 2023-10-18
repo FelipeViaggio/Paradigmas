@@ -5,7 +5,7 @@ import NemoProject.Nemo;
 public class Descend extends Command {
     @Override
     public void execute(Nemo nemo) {
-        nemo.descend();
+        nemo.descend( nemo );
     }
 
     @Override

@@ -12,8 +12,11 @@ import java.util.List;
 
 public class Nemo {
     private Direction direction = new North();
-    private DepthState depthState = new Superficie();
+    private ArrayList<DepthState> depthState = new ArrayList<>();
     static public String NEMO_EXPLODED = "Nemo exploded";
+    public Nemo () {
+        depthState.add( new Superficie() );
+    }
 
     private static final List<Command> commands = Arrays.asList(
             new Descend(),
@@ -28,23 +31,33 @@ public class Nemo {
     }
 
     public boolean isOnSurface() {
-        return z == 0;
-    }
+        return (depthState.size() - 1 == 0);
+    } // ARREGLAR
 
     public int getDepth() {
-        return z;
-    }
+        return depthState.size() - 1;
+    } // ARREGLAR
 
     public Direction getDirection() {
         return direction;
     }
 
-    public void ascend() {
-        depthState = depthState.ascend();
+    public void ascend( Nemo nemo ) {
+        DepthState currentState = depthState.get( depthState.size() - 1 );
+        currentState.ascend( this );
     }
 
-    public void descend() {
-        depthState = depthState.descend();
+    public void descend( Nemo nemo ) {
+        DepthState currentState = depthState.get( depthState.size() - 1 );
+        currentState.descend( this );
+    }
+
+    public void addState( DepthState currentState ) {
+        depthState.add( currentState );
+    }
+
+    public void removeState() {
+        depthState.remove( depthState.size() - 1 );
     }
 
     public void moveForward() {
@@ -60,7 +73,8 @@ public class Nemo {
     }
 
     public void releaseCapsule() {
-        depthState = depthState.releaseCapsule();
+        DepthState currentState = depthState.get( depthState.size() - 1 );
+        currentState.releaseCapsule( this );
     }
 
     public void move(String orders) {
