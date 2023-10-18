@@ -15,7 +15,7 @@ public class West extends Direction {
 
     @Override
     public void moveForward(Nemo nemo) {
-        Coordenate.decrementX();
+        Points.decrementX();
     }
 
     @Override
