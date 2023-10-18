@@ -48,7 +48,7 @@ public class Nemo {
     }
 
     public void moveForward() {
-        direction.moveForward(this);
+        direction.moveForward( this );
     }
 
     public void turnLeft() {
@@ -73,4 +73,9 @@ public class Nemo {
                             .ifPresent(command -> command.execute(this));
                 });
     }
+
+    public Object error() {
+        throw new Error( NEMO_EXPLODED );
+    }
 }
+

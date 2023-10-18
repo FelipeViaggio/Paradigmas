@@ -10,7 +10,7 @@ public class NivelMayorA1 extends DepthState {
     public DepthState descend() {
         return this;
 
-    public void liberarCapsula() {
-        // Implementa la lógica para liberar la cápsula en un nivel mayor a 1
+    public Object releaseCapsule( Nemo nemo ) {
+        return nemo.error();
     }
 }

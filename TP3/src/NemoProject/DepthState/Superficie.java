@@ -14,7 +14,8 @@ public class Superficie extends DepthState {
         return new Nivel1();
     }
 
-    public void liberarCapsula() {
-        // Implementa la lógica para liberar la cápsula en la superficie
+    @Override
+    public String releaseCapsule() {
+        return "Capsule released correctly"; // Implementa la lógica para liberar la cápsula en la superficie
     }
 }
