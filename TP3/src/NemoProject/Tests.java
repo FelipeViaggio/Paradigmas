@@ -1,4 +1,6 @@
-import org.junit.jupiter.api.BeforeEach;
+package NemoProject;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -16,7 +18,7 @@ public class Tests {
 
     @Test
     public void test02ShouldStartLookingToNorth(){
-        assertEquals( "North", new Nemo().getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.North", new Nemo().getDirection().getDirectionString() );
     }
 
     @Test
@@ -60,31 +62,31 @@ public class Tests {
     public void test08TurningRightWorksCorrectly() {
         Nemo nemo = new Nemo();
         nemo.move( "r" );
-        assertEquals( "East", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.East", nemo.getDirection().getDirectionString() );
         nemo.move("r");
-        assertEquals( "South", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.South", nemo.getDirection().getDirectionString() );
         nemo.move("r");
-        assertEquals( "West", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.West", nemo.getDirection().getDirectionString() );
         nemo.move("r");
-        assertEquals( "North", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.North", nemo.getDirection().getDirectionString() );
     }
 
     @Test
     public void test09TurningLeftWorksCorrectly() {
         Nemo nemo = new Nemo();
         nemo.move( "l" );
-        assertEquals( "West", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.West", nemo.getDirection().getDirectionString() );
         nemo.move("l");
-        assertEquals( "South", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.South", nemo.getDirection().getDirectionString() );
         nemo.move("l");
-        assertEquals( "East", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.East", nemo.getDirection().getDirectionString() );
         nemo.move("l");
-        assertEquals( "North", nemo.getDirection().getDirectionString() );
+        Assertions.assertEquals( "Directions.North", nemo.getDirection().getDirectionString() );
     }
 
 //    @Test
 //    public void test10NemoLaunchsTheCapsuleAtDepth0AndDepth1() {
-//        Nemo nemo = new Nemo();
+//        NemoProject.Commands.Nemo nemo = new NemoProject.Commands.Nemo();
 //        nemo.move( "m" );
 //        assertEquals( "Capsule launched!", nemo.launchCapsule() );
 //        nemo.move( "dm" );
@@ -93,9 +95,9 @@ public class Tests {
 //
 //    @Test
 //    public void test11NemoExplodesWhenCapsuleIsLaunchedUnderDepth1() {
-//        Nemo nemo = new Nemo();
+//        NemoProject.Commands.Nemo nemo = new NemoProject.Commands.Nemo();
 //        nemo.move( "dd" );
-//        assertThrowsLike( () -> nemo.move("m"), "Cannot launch capsule at this depth, Nemo exploded!" );
+//        assertThrowsLike( () -> nemo.move("m"), "Cannot launch capsule at this depth, NemoProject.Commands.Nemo exploded!" );
 //    }
 
 

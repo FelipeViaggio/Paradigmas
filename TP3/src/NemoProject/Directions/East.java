@@ -1,4 +1,8 @@
-public class East extends Direction{
+package NemoProject.Directions;
+import NemoProject.Nemo;
+import NemoProject.Coordenate;
+
+public class East extends Direction {
     @Override
     public Direction turnRight() {
         return new South();
@@ -16,6 +20,6 @@ public class East extends Direction{
 
     @Override
     public String getDirectionString() {
-        return "East";
+        return "Directions.East";
     }
 }

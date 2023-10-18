@@ -1,3 +1,7 @@
+package NemoProject.Directions;
+import NemoProject.Nemo;
+import NemoProject.Coordenate;
+
 public class West extends Direction {
     @Override
     public Direction turnRight() {
@@ -16,6 +20,6 @@ public class West extends Direction {
 
     @Override
     public String getDirectionString() {
-        return "West";
+        return "Directions.West";
     }
 }

@@ -1,11 +1,20 @@
+package NemoProject;
+
+import NemoProject.Commands.*;
+import NemoProject.DepthState.DepthState;
+import NemoProject.DepthState.Superficie;
+import NemoProject.Directions.Direction;
+import NemoProject.Directions.North;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Nemo {
-//    public int x = 0;
-//    public int y = 0;
-    public int z = 0;
     private Direction direction = new North();
+    private DepthState depthState = new Superficie();
+    static public String NEMO_EXPLODED = "Nemo exploded";
+
     private static final List<Command> commands = Arrays.asList(
             new Descend(),
             new Ascend(),
@@ -31,31 +40,12 @@ public class Nemo {
     }
 
     public void ascend() {
-        if (z == 0) {
-            return;
-        }
-        z--;
+        depthState = depthState.ascend();
     }
 
     public void descend() {
-        z++;
+        depthState = depthState.descend();
     }
-
-//    public void incrementY() {
-//        y++;
-//    }
-//
-//    public void decrementY() {
-//        y--;
-//    }
-//
-//    public void incrementX() {
-//        x++;
-//    }
-//
-//    public void decrementX() {
-//        x--;
-//    }
 
     public void moveForward() {
         direction.moveForward(this);
@@ -67,6 +57,10 @@ public class Nemo {
 
     public void turnRight() {
         direction = direction.turnRight();
+    }
+
+    public void releaseCapsule() {
+        depthState = depthState.releaseCapsule();
     }
 
     public void move(String orders) {

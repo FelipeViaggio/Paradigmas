@@ -1,4 +1,8 @@
-public class TurnRight extends Command{
+package NemoProject.Commands;
+
+import NemoProject.Nemo;
+
+public class TurnRight extends Command {
     @Override
     public void execute(Nemo nemo) {
         nemo.turnRight();
