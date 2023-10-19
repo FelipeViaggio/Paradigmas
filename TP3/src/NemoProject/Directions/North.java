@@ -15,7 +15,7 @@ public class North extends Direction {
 
     @Override
     public void moveForward(Nemo nemo) {
-        Coordenate.incrementY();
+        nemo.getDirection().moveForward( nemo );
     }
 
     @Override

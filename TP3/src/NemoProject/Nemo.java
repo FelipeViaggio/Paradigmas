@@ -14,7 +14,11 @@ public class Nemo {
     private Direction direction = new North();
     private ArrayList<DepthState> depthState = new ArrayList<>();
     static public String NEMO_EXPLODED = "Nemo exploded";
-    public Nemo () {
+    public Coordenate coord;
+
+
+    public Nemo ( Point point ) {
+        coord = new Coordenate( point );
         depthState.add( new Superficie() );
     }
 
@@ -26,20 +30,28 @@ public class Nemo {
             new TurnRight()
     );
 
-    public int[] getPosition() {
-        return new int[]{ Coordenate.x, Coordenate.y};
-    }
-
-    public boolean isOnSurface() {
-        return (depthState.size() - 1 == 0);
-    }
-
     public int getDepth() {
         return depthState.size() - 1;
     }
 
+//    public int getXCoordinate() {
+//        return coord.getXCoordinate();
+//    }
+
+//    public int getYCoordinate() {
+//        return coord.getYCoordinate();
+//    }
+
     public Direction getDirection() {
         return direction;
+    }
+
+    public Point getPosition() {
+        return new Point( coord.point.getXCoordinate(), coord.point.getYCoordinate() );
+    }
+
+    public boolean isOnSurface() {
+        return (depthState.size() - 1 == 0);
     }
 
     public void ascend( Nemo nemo ) {

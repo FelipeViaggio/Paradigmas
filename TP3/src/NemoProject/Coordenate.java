@@ -1,22 +1,20 @@
 package NemoProject;
 
 public class Coordenate {
-    public static int x = 0;
-    public static int y = 0;
+    public Point point;
 
-    public static void incrementX() {
-        x++;
+    public Coordenate( Point point ) {
+        this.point = point;
     }
 
-    public static void decrementX() {
-        x--;
-    }
+//    public int getXCoordinate() {
+//        return this.point.getXCoordinate();
+//    }
 
-    public static void incrementY() {
-        y++;
-    }
+//    public int getYCoordinate() {
+//        return this.point.getYCoordinate();
+//    }
 
-    public static void decrementY() {
-        y--;
-    }
+
+
 }
