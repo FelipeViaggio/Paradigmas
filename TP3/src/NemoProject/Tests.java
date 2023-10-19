@@ -83,26 +83,25 @@ public class Tests {
         nemo.move("l");
         Assertions.assertEquals( "North", nemo.getDirection().getDirectionString() );
     }
+    @Test
+  public void test10NemoLaunchsTheCapsuleAtDepth0AndDepth1() {
+        Nemo nemo = new Nemo();
+        nemo.move( "m" );
+        assertEquals( "Capsule released correctly", nemo.releaseCapsule() );
+        nemo.move( "dm" );
+        assertEquals( "Capsule released correctly", nemo.releaseCapsule() );
+    }
 
-//    @Test
-//    public void test10NemoLaunchsTheCapsuleAtDepth0AndDepth1() {
-//        Nemo nemo = new Nemo();
-//        nemo.move( "m" );
-//        assertEquals( "Capsule released correctly", nemo.releaseCapsule() );
-//        nemo.move( "dm" );
-//        assertEquals( "Capsule released correctly", Nemo.releaseCapsule() );
-//    }
-//
-//    @Test
-//    public void test11NemoExplodesWhenCapsuleIsLaunchedUnderDepth1() {
-//        Nemo nemo = new Nemo();
-//        nemo.move( "dd" );
-//        assertThrowsLike( () -> nemo.move("m"), Nemo.NEMO_EXPLODED );
-//    }
-
+    @Test
+    public void test11NemoExplodesWhenCapsuleIsLaunchedUnderDepth1() {
+        Nemo nemo = new Nemo();
+        nemo.move( "dd" );
+        assertThrowsLike( Nemo.NEMO_EXPLODED, () -> nemo.releaseCapsule() );
+    }
 
 
-    private void assertThrowsLike( Executable executable, String message ) {
-        assertEquals( message, assertThrows( RuntimeException.class, executable).getMessage() );
+
+    private void assertThrowsLike(String expectedErrorMessage, Executable toBeEvaluated) {
+        assertEquals(expectedErrorMessage, assertThrows(Error.class, toBeEvaluated).getMessage());
     }
 }

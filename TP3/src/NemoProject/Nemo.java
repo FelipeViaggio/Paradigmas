@@ -72,9 +72,9 @@ public class Nemo {
         direction = direction.turnRight();
     }
 
-    public void releaseCapsule() {
+    public String releaseCapsule() {
         DepthState currentState = depthState.get( depthState.size() - 1 );
-        currentState.releaseCapsule( this );
+        return (String) currentState.releaseCapsule( this );
     }
 
     public void move(String orders) {
@@ -89,7 +89,7 @@ public class Nemo {
     }
 
     public Object error() {
-        throw new RuntimeException( NEMO_EXPLODED );
+        throw new Error( NEMO_EXPLODED );
     }
 }
 
