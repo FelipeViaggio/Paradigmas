@@ -4,18 +4,13 @@ import NemoProject.Commands.*;
 import NemoProject.DepthState.DepthState;
 import NemoProject.DepthState.Surface;
 import NemoProject.Directions.Direction;
-import NemoProject.Directions.North;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Nemo {
     private Direction currentDirection;
     private ArrayList<DepthState> depthState = new ArrayList<>();
     static public String NEMO_EXPLODED = "Nemo exploded";
-    public Coordenate coord;
-
+    public Coordinate currentCoordinate;
 
     public Nemo ( Point point, Direction direction ) {
         this.currentCoordinate = new Coordinate( point, direction );
@@ -23,42 +18,19 @@ public class Nemo {
         depthState.add( new Surface() );
     }
 
-    private static final List<Command> commands = Arrays.asList(
-            new Descend(),
-            new Ascend(),
-            new MoveForward(),
-            new TurnLeft(),
-            new TurnRight()
-    );
-
     public int getDepth() {
         return depthState.size() - 1;
     }
 
-//    public int getXCoordinate() {
-//        return coord.getXCoordinate();
-//    }
-
-//    public int getYCoordinate() {
-//        return coord.getYCoordinate();
-//    }
-
-    public Direction getDirection() {
-        return direction;
-    }
+    public Direction getDirection() { return currentDirection; }
 
     public Point getPosition() { return this.currentCoordinate.point; }
 
-    public boolean isOnSurface() {
-        return (depthState.size() - 1 == 0);
-    }
+    public boolean isOnSurface() { return (this.getDepth() == 0);}
 
     public void ascend( Nemo nemo ) { getCurrentState().ascend( this ); }
 
-    public void descend( Nemo nemo ) {
-        DepthState currentState = depthState.get( depthState.size() - 1 );
-        currentState.descend( this );
-    }
+    public void descend( Nemo nemo ) { getCurrentState().descend( this ); }
 
     public void addState( DepthState currentState ) {
         depthState.add( currentState );
@@ -92,8 +64,8 @@ public class Nemo {
                 });
     }
 
-    public Object error() {
-        throw new Error( NEMO_EXPLODED );
-    }
+    public Object error() { throw new Error( NEMO_EXPLODED ); }
+
+    private DepthState getCurrentState() { return depthState.get(this.getDepth()); }
 }
 

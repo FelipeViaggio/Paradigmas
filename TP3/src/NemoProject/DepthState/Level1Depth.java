@@ -1,5 +1,7 @@
 package NemoProject.DepthState;
 
+import NemoProject.Nemo;
+
 public class Level1Depth extends DepthState {
     public void ascend( Nemo nemo ) {
         nemo.removeState();
