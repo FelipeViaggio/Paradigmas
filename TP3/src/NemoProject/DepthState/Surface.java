@@ -2,18 +2,18 @@ package NemoProject.DepthState;
 
 import NemoProject.Nemo;
 
-public class Superficie extends DepthState {
+public class Surface extends DepthState {
 
     @Override
     public void ascend( Nemo nemo ) {}
 
     @Override
     public void descend( Nemo nemo ) {
-        nemo.addState( new Nivel1() );
+        nemo.addState( new Level1Depth() );
     }
 
     @Override
     public String releaseCapsule( Nemo nemo ) {
-        return "Capsule released correctly"; // Implementa la lógica para liberar la cápsula en la superficie
+        return "Capsule released correctly";
     }
 }
