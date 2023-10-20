@@ -1,6 +1,6 @@
 package NemoProject.Directions;
 import NemoProject.Nemo;
-import NemoProject.Coordenate;
+import NemoProject.Point;
 
 public class South extends Direction {
     @Override
@@ -14,8 +14,8 @@ public class South extends Direction {
     }
 
     @Override
-    public void moveForward(Nemo nemo) {
-        Coordenate.decrementY();
+    public void moveForward( Nemo nemo ) {
+        nemo.getPosition().addPoint( new Point( 0, -1 ) );
     }
 
     @Override

@@ -2,94 +2,70 @@ package NemoProject;
 
 import NemoProject.Commands.*;
 import NemoProject.DepthState.DepthState;
-import NemoProject.DepthState.Superficie;
+import NemoProject.DepthState.Surface;
 import NemoProject.Directions.Direction;
-import NemoProject.Directions.North;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Nemo {
-    private Direction direction = new North();
+    private Direction currentDirection;
     private ArrayList<DepthState> depthState = new ArrayList<>();
     static public String NEMO_EXPLODED = "Nemo exploded";
-    public Nemo () {
-        depthState.add( new Superficie() );
-    }
+    public Coordinate currentCoordinate;
 
-    private static final List<Command> commands = Arrays.asList(
-            new Descend(),
-            new Ascend(),
-            new MoveForward(),
-            new TurnLeft(),
-            new TurnRight()
-    );
-
-    public int[] getPosition() {
-        return new int[]{ Coordenate.x, Coordenate.y};
-    }
-
-    public boolean isOnSurface() {
-        return (depthState.size() - 1 == 0);
+    public Nemo ( Point point, Direction direction ) {
+        this.currentCoordinate = new Coordinate( point, direction );
+        this.currentDirection = direction;
+        depthState.add( new Surface() );
     }
 
     public int getDepth() {
         return depthState.size() - 1;
     }
 
-    public Direction getDirection() {
-        return direction;
-    }
+    public Direction getDirection() { return currentDirection; }
 
-    public void ascend( Nemo nemo ) {
-        DepthState currentState = depthState.get( depthState.size() - 1 );
-        currentState.ascend( this );
-    }
+    public Point getPosition() { return this.currentCoordinate.point; }
 
-    public void descend( Nemo nemo ) {
-        DepthState currentState = depthState.get( depthState.size() - 1 );
-        currentState.descend( this );
-    }
+    public boolean isOnSurface() { return (this.getDepth() == 0);}
+
+    public void ascend( Nemo nemo ) { getCurrentState().ascend( this ); }
+
+    public void descend( Nemo nemo ) { getCurrentState().descend( this ); }
 
     public void addState( DepthState currentState ) {
         depthState.add( currentState );
     }
 
     public void removeState() {
-        depthState.remove( depthState.size() - 1 );
+        depthState.remove( this.getDepth() );
     }
 
     public void moveForward() {
-        direction.moveForward( this );
+        currentDirection.moveForward( this );
     }
 
     public void turnLeft() {
-        direction = direction.turnLeft();
+        currentDirection = currentDirection.turnLeft();
     }
 
     public void turnRight() {
-        direction = direction.turnRight();
+        currentDirection = currentDirection.turnRight();
     }
 
-    public String releaseCapsule() {
-        DepthState currentState = depthState.get( depthState.size() - 1 );
-        return (String) currentState.releaseCapsule( this );
-    }
+    public String releaseCapsule() { return (String) getCurrentState().releaseCapsule( this ); }
 
-    public void move(String orders) {
-        orders.chars()
-                .mapToObj(c -> (char) c)
-                .forEach(order -> {
-                    commands.stream()
-                            .filter(command -> command.matches(order))
-                            .findFirst()
-                            .ifPresent(command -> command.execute(this));
+    public void move(String directions){
+        directions.toLowerCase().chars()
+                .forEach(direction -> {
+                    char directionChar = (char) direction;
+                    Command.commands.stream()
+                            .filter(command -> command.matches(directionChar))
+                            .forEach(command -> command.execute(this));
                 });
     }
 
-    public Object error() {
-        throw new Error( NEMO_EXPLODED );
-    }
+    public Object error() { throw new Error( NEMO_EXPLODED ); }
+
+    private DepthState getCurrentState() { return depthState.get(this.getDepth()); }
 }
 
