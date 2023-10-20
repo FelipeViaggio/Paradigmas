@@ -96,7 +96,7 @@ public class Tests {
     public void test11NemoExplodesWhenCapsuleIsLaunchedUnderDepth1() {
         Nemo nemo = new Nemo( new Point( 0, 0 ) );
         nemo.move( "dd" );
-        assertThrowsLike( Nemo.NEMO_EXPLODED, () -> nemo.releaseCapsule() );
+        assertThrowsLike( Nemo.NEMO_EXPLODED, () -> nemo.move("m") );
     }
 
 
