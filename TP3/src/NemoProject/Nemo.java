@@ -20,9 +20,8 @@ public class Nemo {
         depthState.add( new Surface() );
     }
 
-    public int getDepth() {
-        return depthState.size() - 1;
-    }
+    public int getDepth() { return depthState.size() - 1; }
+
     public Coordinate getCoordinate() { return this.currentCoordinate; }
 
     public Direction getDirection() { return currentDirection; }
