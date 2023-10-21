@@ -11,4 +11,13 @@ public class Coordinate {
         this.direction = direction;
     }
 
+    public Point getPosition() {
+        return this.point;
+    }
+
+    public Point addPoint( Point point ) {
+        return new Point( this.getPosition().x += point.getXCoordinate(),
+                this.getPosition().y += point.getYCoordinate() );
+    }
+
 }

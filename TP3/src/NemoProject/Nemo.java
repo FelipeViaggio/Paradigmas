@@ -21,10 +21,11 @@ public class Nemo {
     public int getDepth() {
         return depthState.size() - 1;
     }
+    public Coordinate getCoordinate() { return this.currentCoordinate; }
 
     public Direction getDirection() { return currentDirection; }
 
-    public Point getPosition() { return this.currentCoordinate.point; }
+    public Point getPosition() { return this.currentCoordinate.getPosition(); }
 
     public boolean isOnSurface() { return (this.getDepth() == 0);}
 
