@@ -17,11 +17,6 @@ public class Point {
         return this.y;
     }
 
-    public void addPoint( Point point ) {
-        this.x += point.getXCoordinate();
-        this.y += point.getYCoordinate();
-    }
-
     public boolean equals( Point point ) {
         return (this.x == point.getXCoordinate() && this.y == point.getYCoordinate());
     }
