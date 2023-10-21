@@ -1,4 +1,4 @@
-package NemoProject;
+package NemoProject.Coordinates;
 
 import NemoProject.Directions.Direction;
 

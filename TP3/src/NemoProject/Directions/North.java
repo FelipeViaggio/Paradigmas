@@ -1,6 +1,6 @@
 package NemoProject.Directions;
 import NemoProject.Nemo;
-import NemoProject.Point;
+import NemoProject.Coordinates.Point;
 
 public class North extends Direction {
     @Override

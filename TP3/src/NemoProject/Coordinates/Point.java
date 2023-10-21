@@ -1,4 +1,4 @@
-package NemoProject;
+package NemoProject.Coordinates;
 
 public class Point {
     int x;

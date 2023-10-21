@@ -1,6 +1,8 @@
 package NemoProject;
 
 import NemoProject.Commands.*;
+import NemoProject.Coordinates.Coordinate;
+import NemoProject.Coordinates.Point;
 import NemoProject.DepthState.DepthState;
 import NemoProject.DepthState.Surface;
 import NemoProject.Directions.Direction;
@@ -12,7 +14,7 @@ public class Nemo {
     static public String NEMO_EXPLODED = "Nemo exploded";
     public Coordinate currentCoordinate;
 
-    public Nemo ( Point point, Direction direction ) {
+    public Nemo (Point point, Direction direction ) {
         this.currentCoordinate = new Coordinate( point, direction );
         this.currentDirection = direction;
         depthState.add( new Surface() );
