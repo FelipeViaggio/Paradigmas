@@ -1,5 +1,3 @@
-package NemoProject.Coordinates;
-
 public class Point {
     int x;
     int y;

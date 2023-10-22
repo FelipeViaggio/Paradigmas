@@ -1,7 +1,3 @@
-package NemoProject.Commands;
-
-import NemoProject.Nemo;
-
 public class TurnLeft extends Command {
     public void execute(Nemo nemo) {
         nemo.turnLeft();
