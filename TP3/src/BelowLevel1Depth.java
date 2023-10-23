@@ -1,5 +1,3 @@
-import javax.management.RuntimeErrorException;
-
 public class BelowLevel1Depth extends DepthState {
     public void ascend( Nemo nemo ) {
         nemo.removeState();
