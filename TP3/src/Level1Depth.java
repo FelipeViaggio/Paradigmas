@@ -7,7 +7,4 @@ public class Level1Depth extends DepthState {
         nemo.addState( new BelowLevel1Depth() );
     }
 
-    public String releaseCapsule( Nemo nemo ) {
-        return "Capsule released correctly";
-    }
 }

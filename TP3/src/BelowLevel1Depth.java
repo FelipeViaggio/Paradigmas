@@ -1,3 +1,5 @@
+import javax.management.RuntimeErrorException;
+
 public class BelowLevel1Depth extends DepthState {
     public void ascend( Nemo nemo ) {
         nemo.removeState();
@@ -7,7 +9,7 @@ public class BelowLevel1Depth extends DepthState {
         nemo.addState( new BelowLevel1Depth() );
     }
 
-    public Object releaseCapsule( Nemo nemo ) {
-        return nemo.error();
+    public void releaseCapsule() {
+        throw new RuntimeException( Nemo.NEMO_EXPLODED );
     }
 }

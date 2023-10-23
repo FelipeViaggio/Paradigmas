@@ -12,6 +12,14 @@ public abstract class Command {
             new ReleaseCapsule()
     );
 
+    public static void executeAll(Nemo nemo, String directions) {
+        directions.toLowerCase().chars()
+                .mapToObj(c -> (char) c)
+                .forEach(directionChar -> commands.stream()
+                        .filter(command -> command.matches(directionChar))
+                        .forEach(command -> command.execute(nemo)));
+    }
+
     public abstract void execute( Nemo nemo );
     public abstract boolean matches( char order );
 

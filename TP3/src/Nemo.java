@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 
 public class Nemo {
+
+    static public String NEMO_EXPLODED = "Nemo exploded";
     private Direction currentDirection;
     private ArrayList<DepthState> depthState = new ArrayList<>();
-    static public String NEMO_EXPLODED = "Nemo exploded";
     public Coordinate currentCoordinate;
 
     public Nemo (Point point, Direction direction ) {
@@ -46,7 +47,7 @@ public class Nemo {
         currentDirection = currentDirection.turnRight();
     }
 
-    public String releaseCapsule() { return (String) getCurrentState().releaseCapsule( this ); }
+    public void releaseCapsule() { getCurrentState().releaseCapsule(); }
 
     public void move(String directions) {
         Command.executeAll( this, directions );

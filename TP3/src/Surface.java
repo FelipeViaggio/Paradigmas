@@ -8,8 +8,4 @@ public class Surface extends DepthState {
         nemo.addState( new Level1Depth() );
     }
 
-    @Override
-    public String releaseCapsule( Nemo nemo ) {
-        return "Capsule released correctly";
-    }
 }
