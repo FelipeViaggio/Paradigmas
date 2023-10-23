@@ -14,11 +14,11 @@ public class Nemo {
 
     public int getDepth() { return depthState.size() - 1; }
 
-    public Coordinate getCoordinate() { return this.currentCoordinate; }
+    public Coordinate getCoordinate() { return currentCoordinate; }
 
     public Direction getDirection() { return currentDirection; }
 
-    public Point getPosition() { return this.currentCoordinate.getPosition(); }
+    public Point getPosition() { return currentCoordinate.getPosition(); }
 
     public boolean isOnSurface() { return (this.getDepth() == 0);}
 
@@ -48,18 +48,10 @@ public class Nemo {
 
     public String releaseCapsule() { return (String) getCurrentState().releaseCapsule( this ); }
 
-    public void move(String directions){
-        directions.toLowerCase().chars()
-                .forEach(direction -> {
-                    char directionChar = (char) direction;
-                    Command.commands.stream()
-                            .filter(command -> command.matches(directionChar))
-                            .forEach(command -> command.execute(this));
-                });
+    public void move(String directions) {
+        Command.executeAll( this, directions );
     }
 
-    public Object error() { throw new Error( NEMO_EXPLODED ); }
-
-    private DepthState getCurrentState() { return depthState.get(this.getDepth()); }
+    private DepthState getCurrentState() { return depthState.get( this.getDepth() ); }
 }
 
