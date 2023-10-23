@@ -1,7 +1,3 @@
-package NemoProject;
-
-import NemoProject.Directions.Direction;
-
 public class Coordinate {
     public Point point;
     public Direction direction;

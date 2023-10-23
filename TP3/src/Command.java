@@ -1,7 +1,3 @@
-package NemoProject.Commands;
-
-import NemoProject.Nemo;
-
 import java.util.Arrays;
 import java.util.List;
 

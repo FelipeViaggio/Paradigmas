@@ -1,9 +1,3 @@
-package NemoProject;
-
-import NemoProject.Commands.*;
-import NemoProject.DepthState.DepthState;
-import NemoProject.DepthState.Surface;
-import NemoProject.Directions.Direction;
 import java.util.ArrayList;
 
 public class Nemo {
@@ -12,15 +6,14 @@ public class Nemo {
     static public String NEMO_EXPLODED = "Nemo exploded";
     public Coordinate currentCoordinate;
 
-    public Nemo ( Point point, Direction direction ) {
+    public Nemo (Point point, Direction direction ) {
         this.currentCoordinate = new Coordinate( point, direction );
         this.currentDirection = direction;
         depthState.add( new Surface() );
     }
 
-    public int getDepth() {
-        return depthState.size() - 1;
-    }
+    public int getDepth() { return depthState.size() - 1; }
+
     public Coordinate getCoordinate() { return this.currentCoordinate; }
 
     public Direction getDirection() { return currentDirection; }

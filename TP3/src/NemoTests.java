@@ -1,7 +1,3 @@
-package NemoProject;
-
-import NemoProject.Directions.North;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -10,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class NemoTests {
     @Test
     public void test00ShouldStartWhereItIsTold(){
-        assertTrue( new Point( 0, 0 ).equals( nemoAtPointZeroLookingToNorth().getPosition() ));
+        assertTrue( new Point( 0, 0 ).equals( nemoAtPointZeroLookingToNorth().getPosition() ) );
     }
 
     @Test
     public void test01ShouldStartLookingToWhereItIsTold(){
-        Assertions.assertEquals( "North", nemoAtPointZeroLookingToNorth().getDirection().getDirectionString() );
+        assertEquals( "North", nemoAtPointZeroLookingToNorth().getDirection().getDirectionString() );
     }
 
     @Test
@@ -26,7 +22,7 @@ public class NemoTests {
     @Test
     public void test03ShouldNotMoveIfNoOrderGiven(){
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "" );
-        assertTrue( new Point( 0, 0 ).equals( nemo.getPosition() ));
+        assertTrue( isNemoAtPositionSelected( nemo, 0, 0 ) );
     }
 
     @Test
@@ -64,13 +60,13 @@ public class NemoTests {
     public void test08TurningLeftWorksCorrectly() {
         Nemo nemo = nemoAtPointZeroLookingToNorth();
         nemo.move( "l" );
-        Assertions.assertEquals( "West", nemo.getDirection().getDirectionString() );
+        assertEquals( "West", nemo.getDirection().getDirectionString() );
         nemo.move( "l" );
-        Assertions.assertEquals( "South", nemo.getDirection().getDirectionString() );
+        assertEquals( "South", nemo.getDirection().getDirectionString() );
         nemo.move( "l" );
-        Assertions.assertEquals( "East", nemo.getDirection().getDirectionString() );
+        assertEquals( "East", nemo.getDirection().getDirectionString() );
         nemo.move( "l" );
-        Assertions.assertEquals( "North", nemo.getDirection().getDirectionString() );
+        assertEquals( "North", nemo.getDirection().getDirectionString() );
     }
 
     @Test
@@ -83,48 +79,48 @@ public class NemoTests {
     @Test
     public void test10MovingWorksCorrectly() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "uddrrfff" );
-        assertTrue( new Point( 0, -3 ).equals( nemo.getPosition() ));
-        assertEquals(2 , nemo.getDepth() );
+        assertTrue( isNemoAtPositionSelected( nemo, 0, -3 ) );
+        assertEquals( 2 , nemo.getDepth() );
     }
 
     @Test
     public void test11NemoCanMoveForwardMultipleTimes() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "ffff" );
-        assertTrue( new Point( 0, 4 ).equals( nemo.getPosition() ));
+        assertTrue( isNemoAtPositionSelected( nemo, 0, 4 ) );
     }
 
     @Test
     public void test12NemoCanChangeDepthMultipleTimes() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "ddu" );
-        assertEquals(1, nemo.getDepth());
+        assertEquals( 1, nemo.getDepth() );
     }
 
     @Test
     public void test13NemoMovesInAllDirections() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "rflflfrfr" );
-        assertTrue( new Point( 0, 2 ).equals( nemo.getPosition() ));
+        assertTrue( isNemoAtPositionSelected( nemo, 0, 2 ) );
         assertEquals( "East", nemo.getDirection().getDirectionString() );
     }
 
     @Test
     public void test14NemoMovesInAllDirectionsUnderwater() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "drflflfrfru" );
-        assertTrue( new Point( 0, 2 ).equals( nemo.getPosition() ));
+        assertTrue( isNemoAtPositionSelected( nemo, 0, 2 ) );
         assertEquals( "East", nemo.getDirection().getDirectionString() );
-        assertTrue(nemo.isOnSurface());
+        assertTrue( nemo.isOnSurface() );
     }
 
     @Test
     public void test15NemoMovesInSquare() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "rfrfrfrf" );
-        assertTrue( new Point( 0, 0 ).equals( nemo.getPosition() ));
-        assertTrue(nemo.isOnSurface());
+        assertTrue( isNemoAtPositionSelected( nemo, 0, 0 ) );
+        assertTrue( nemo.isOnSurface() );
     }
 
     @Test
     public void test16NemoMovesInSquareUnderwater() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "drfrfrfrf" );
-        assertTrue( new Point( 0, 0 ).equals( nemo.getPosition() ));
+        assertTrue( isNemoAtPositionSelected( nemo, 0, 0 ) );
         assertEquals( 1, nemo.getDepth() );
     }
 
@@ -139,32 +135,32 @@ public class NemoTests {
     @Test
     public void test18NemoCapsuleReleaseDoesNotAffectMovement() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "mrf" );
-        assertTrue( new Point( 1, 0 ).equals( nemo.getPosition() ));
+        assertTrue( isNemoAtPositionSelected( nemo, 1, 0 ) );
     }
 
     @Test
     public void test19NemoCapsuleReleaseDoesNotAffectMovementUnderwater() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "dmrfu" );
-        assertTrue( new Point( 1, 0 ).equals( nemo.getPosition() ));
-        assertTrue(nemo.isOnSurface());
+        assertTrue( isNemoAtPositionSelected( nemo, 1, 0 ) );
+        assertTrue( nemo.isOnSurface() );
     }
 
     @Test
     public void test20NemoCapsuleReleaseDoesNotAffectRotation() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "mrl" );
-        assertEquals("North", nemo.getDirection().getDirectionString());
+        assertEquals( "North", nemo.getDirection().getDirectionString() );
     }
 
     @Test
     public void test21NemoCapsuleReleaseDoesNotAffectRotationUnderwater() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "dmrlu" );
-        assertEquals("North", nemo.getDirection().getDirectionString());
+        assertEquals( "North", nemo.getDirection().getDirectionString() );
     }
 
     @Test
     public void test22NemoCapsuleReleaseDoesNotAffectDepth() {
         Nemo nemo = nemoAtPointZeroLookingtoNorthMoves( "dmu" );
-        assertEquals(0, nemo.getDepth());
+        assertTrue( nemo.isOnSurface() );
     }
 
     @Test
@@ -175,11 +171,11 @@ public class NemoTests {
 
     @Test
     public void test24NemoExplodesWhenCapsuleIsLaunchedAtDepth2() {
-        assertThrowsLike(Nemo.NEMO_EXPLODED, () -> nemoAtPointZeroLookingtoNorthMoves( "ddm" ));
+        assertThrowsLike( Nemo.NEMO_EXPLODED, () -> nemoAtPointZeroLookingtoNorthMoves( "ddm" ) );
     }
 
-    private void assertThrowsLike(String expectedErrorMessage, Executable toBeEvaluated) {
-        assertEquals(expectedErrorMessage, assertThrows(Error.class, toBeEvaluated).getMessage());
+    private void assertThrowsLike( String expectedErrorMessage, Executable toBeEvaluated ) {
+        assertEquals( expectedErrorMessage, assertThrows(Error.class, toBeEvaluated).getMessage() );
     }
 
     private static Nemo nemoAtPointZeroLookingToNorth() {
@@ -192,5 +188,8 @@ public class NemoTests {
         return nemo;
     }
 
+    private static boolean isNemoAtPositionSelected( Nemo nemo, int x, int y ) {
+        return new Point( x, y ).equals( nemo.getPosition() );
+    }
 
 }

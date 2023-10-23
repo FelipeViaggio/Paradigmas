@@ -1,7 +1,3 @@
-package NemoProject.DepthState;
-
-import NemoProject.Nemo;
-
 public class Surface extends DepthState {
 
     @Override
