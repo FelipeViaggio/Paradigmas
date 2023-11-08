@@ -6,6 +6,6 @@ public class BCDiagonal extends BBGameModes {
     }
 
     public boolean winningStrategies(AAConnectFour game, int pos) {
-        return game.rightDiagonalWin(pos) || game.leftDiagonalWin(pos);
+        return !game.completedBoard() && (game.rightDiagonalWin(pos) || game.leftDiagonalWin(pos));
     }
 }

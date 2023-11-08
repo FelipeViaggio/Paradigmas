@@ -5,5 +5,9 @@ public class CDBlueTurn extends CCTurns {
         throw new RuntimeException("Not your turn!");
     }
 
-    public void playBlue() {}
+    public CCTurns playBlue(int column, CCTurns turn) {
+        AAConnectFour.gameBoard.get(column - 1).add("O");
+        return new CDRedTurn();
+    }
+
 }

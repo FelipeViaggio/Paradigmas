@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
         private String winner;
         private static final String ERROR_POSITION = "Invalid position";
 
-        private ArrayList<ArrayList<String>> gameBoard = new ArrayList<>();
+        public static ArrayList<ArrayList<String>> gameBoard = new ArrayList<>();
 
 
         public AAConnectFour(int base, int height, char mode) {
@@ -35,51 +35,45 @@ import java.util.stream.IntStream;
         }
 
         public boolean finished() {
-            return redFinished || blueFinished || completedBoard() ;
+            return redFinished || blueFinished || (!redFinished && !blueFinished && completedBoard()) ;
         }
 
         public void playRedAt(int pos) {
-            turn.playRed();
-
             if (pos <= 0 || pos > base) {
                 throw new RuntimeException(ERROR_POSITION);
             }
 
-            gameBoard.get(pos - 1).add("X");
+            turn = turn.playRed(pos, turn);
 
             redFinished = mode.winningStrategies(this, pos);
 
             if (redFinished) {
                 System.out.println("Red wins!");
                 winner = "red";
-            }
-            if (completedBoard()) {
+                turn = new CDGameFinished();
+            } else if (completedBoard()) {
                 System.out.println("Draw!");
                 turn = new CDGameFinished();
             }
-            turn = turn.next();
         }
 
         public void playBlueAt(int pos) {
-            turn.playBlue();
-
             if (pos <= 0 || pos > base) {
                 throw new RuntimeException(ERROR_POSITION);
             }
 
-            gameBoard.get(pos - 1).add(" O ");
+            turn = turn.playBlue(pos, turn);
 
             blueFinished = mode.winningStrategies(this, pos);
 
             if (blueFinished) {
                 System.out.println("Blue wins!");
                 winner = "blue";
-            }
-            if (completedBoard()) {
+                turn = new CDGameFinished();
+            } else if (completedBoard()) {
                 System.out.println("Draw!");
                 turn = new CDGameFinished();
             }
-            turn = turn.next();
         }
 
         public boolean verticalWin(int col) {
