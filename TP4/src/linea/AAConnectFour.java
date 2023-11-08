@@ -1,6 +1,7 @@
 package linea;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
     public class AAConnectFour {
@@ -24,18 +25,11 @@ import java.util.stream.IntStream;
             }
 
         public String show() {
-            String board = "";
-            for (int i = height - 1; i >= 0; i--) {
-                board += "\n|";
-                for (int j = 0; j < base; j++) {
-                    if (gameBoard.get(j).size() > i) {
-                        board += gameBoard.get(j).get(i);
-                    } else {
-                        board += "8";
-                    }
-                }
-                board += "|";
-            }
+            String board = IntStream.range(0, height)
+                    .mapToObj(i -> "\n|" + IntStream.range(0, base)
+                            .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : "8")
+                            .collect(Collectors.joining()) + "|")
+                    .collect(Collectors.joining());
             board += "\n|" + " \uD83D\uDD3C ".repeat(base) + "|";
             return board;
         }
@@ -91,89 +85,46 @@ import java.util.stream.IntStream;
         public boolean verticalWin(int col) {
             int row = gameBoard.get(col - 1).size();
             String chip = gameBoard.get(col - 1).get(row - 1);
-            int inLine = 0;
-            if (row > 3) {
-                for (int i = 0; i < row; i++) {
-                    if (gameBoard.get(col - 1).get(i).equals(chip)) {
-                        inLine++;
-                    } else {
-                        inLine = 0;
-                    }
-                    if (inLine == 4) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return row > 3 && IntStream.range(0, row)
+                    .mapToObj(i -> gameBoard.get(col - 1).get(i))
+                    .filter(chip::equals)
+                    .limit(4)
+                    .count() == 4;
         }
 
         public boolean horizontalWin(int col) {
             int row = gameBoard.get(col - 1).size();
             String chip = gameBoard.get(col - 1).get(row - 1);
-            int inLine = 0;
-            for (int i = 0; i < base; i++) {
-                if (gameBoard.get(i).size() >= row) {
-                    if (gameBoard.get(i).get(row - 1).equals(chip)) {
-                        inLine++;
-                    } else {
-                        inLine = 0;
-                    }
-                } else {
-                    inLine = 0;
-                }
-                if (inLine == 4) {
-                    return true;
-                }
-            }
-            return false;
+            return IntStream.range(0, base)
+                    .filter(i -> gameBoard.get(i).size() >= row)
+                    .mapToObj(i -> gameBoard.get(i).get(row - 1))
+                    .filter(chip::equals)
+                    .limit(4)
+                    .count() == 4;
         }
 
         public boolean rightDiagonalWin(int col) {
             int row = gameBoard.get(col - 1).size();
             String chip = gameBoard.get(col - 1).get(row - 1);
-            int inLine = 0;
             int start = col - row;
-            for (int i = 0; i < base - start; i++) {
-                if (start + i >= 0) {
-                    if (gameBoard.get(start + i).size() > i) {
-                        if (gameBoard.get(start + i).get(i).equals(chip)) {
-                            inLine++;
-                        } else {
-                            inLine = 0;
-                        }
-                        if (inLine == 4) {
-                            return true;
-                        }
-                    } else {
-                        inLine = 0;
-                    }
-                }
-            }
-            return false;
+            return IntStream.range(0, base - start)
+                    .filter(i -> start + i >= 0 && gameBoard.get(start + i).size() > i)
+                    .mapToObj(i -> gameBoard.get(start + i).get(i))
+                    .filter(chip::equals)
+                    .limit(4)
+                    .count() == 4;
         }
 
         public boolean leftDiagonalWin(int col) {
             int row = gameBoard.get(col - 1).size();
             String chip = gameBoard.get(col - 1).get(row - 1);
-            int inLine = 0;
             int start = col + row - 2;
-            for (int i = 0; i < height; i++) {
-                if (start - i < base && start - i >= 0) {
-                    if (gameBoard.get(start - i).size() > i) {
-                        if (gameBoard.get(start - i).get(i).equals(chip)) {
-                            inLine++;
-                        } else {
-                            inLine = 0;
-                        }
-                        if (inLine == 4) {
-                            return true;
-                        }
-                    } else {
-                        inLine = 0;
-                    }
-                }
-            }
-            return false;
+            return IntStream.range(0, height)
+                    .filter(i -> start - i < base && start - i >= 0 && gameBoard.get(start - i).size() > i)
+                    .mapToObj(i -> gameBoard.get(start - i).get(i))
+                    .filter(chip::equals)
+                    .limit(4)
+                    .count() == 4;
         }
 
 
