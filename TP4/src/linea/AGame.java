@@ -1,11 +1,11 @@
 package linea;
 
-public class Game {
+public class AGame {
 
     public static void main( String[] args) throws Exception {
 
         System.out.println( "Dimensiones?");
-        ConnectFour game = new ConnectFour( prompt( "Base? " ), prompt( "Altura? " ), 'C' );
+        AAConnectFour game = new AAConnectFour( prompt( "Base? " ), prompt( "Altura? " ), 'C' );
         System.out.println( game.show() );
 
         while ( !game.finished() ) {

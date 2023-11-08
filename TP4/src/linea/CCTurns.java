@@ -1,7 +1,7 @@
 package linea;
 
-public abstract class Turns {
-    public abstract Turns next();
+public abstract class CCTurns {
+    public abstract CCTurns next();
     public abstract void playRed();
     public abstract void playBlue();
 }

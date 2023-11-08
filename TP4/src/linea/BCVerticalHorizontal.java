@@ -1,11 +1,11 @@
 package linea;
 
-public class VerticalHorizontal extends GameModes {
+public class BCVerticalHorizontal extends BBGameModes {
     public boolean letter(char mode) {
         return mode == 'A';
     }
 
-    public boolean winningStrategies(ConnectFour game, int pos) {
+    public boolean winningStrategies(AAConnectFour game, int pos) {
         return game.verticalWin(pos) || game.horizontalWin(pos);
     }
 }

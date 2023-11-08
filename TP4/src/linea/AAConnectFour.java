@@ -1,29 +1,28 @@
 package linea;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
-    public class ConnectFour {
+    public class AAConnectFour {
         private int base;
         private int height;
-        private GameModes mode;
+        private BBGameModes mode;
         private boolean redFinished;
         private boolean blueFinished;
-        private Turns turn = new RedTurn();
+        private CCTurns turn = new CDRedTurn();
         private String winner;
         private static final String ERROR_POSITION = "Invalid position";
         private static final String ERROR_MODE = "Invalid mode";
 
         private ArrayList<ArrayList<String>> gameBoard = new ArrayList<>();
 
-        public ConnectFour(int base, int height, char mode) {
+
+        public AAConnectFour(int base, int height, char mode) {
             this.base = base;
             this.height = height;
-            this.mode = GameModes.chosenMode(mode, this);
-            for (int i = 0; i < base; i++) {
-                ArrayList<String> column = new ArrayList<String>();
-                gameBoard.add(column);
+            this.mode = BBGameModes.chosenMode(mode, this);
+            IntStream.range(0, base).forEach(i -> gameBoard.add(new ArrayList<>()));
             }
-        }
 
         public String show() {
             String board = "";
@@ -33,7 +32,7 @@ import java.util.ArrayList;
                     if (gameBoard.get(j).size() > i) {
                         board += gameBoard.get(j).get(i);
                     } else {
-                        board += " \uD83D\uDD18 ";
+                        board += "8";
                     }
                 }
                 board += "|";
@@ -43,7 +42,7 @@ import java.util.ArrayList;
         }
 
         public boolean finished() {
-            return redFinished || blueFinished;
+            return redFinished || blueFinished || completedBoard() ;
         }
 
         public void playRedAt(int pos) {
@@ -53,7 +52,7 @@ import java.util.ArrayList;
                 throw new RuntimeException(ERROR_POSITION);
             }
 
-            gameBoard.get(pos - 1).add(" \uD83D\uDD34 ");
+            gameBoard.get(pos - 1).add("X");
 
             redFinished = mode.winningStrategies(this, pos);
 
@@ -61,7 +60,10 @@ import java.util.ArrayList;
                 System.out.println("Red wins!");
                 winner = "red";
             }
-
+            if (completedBoard()) {
+                System.out.println("Draw!");
+                turn = new CDGameFinished();
+            }
             turn = turn.next();
         }
 
@@ -72,7 +74,7 @@ import java.util.ArrayList;
                 throw new RuntimeException(ERROR_POSITION);
             }
 
-            gameBoard.get(pos - 1).add(" \uD83D\uDD35 ");
+            gameBoard.get(pos - 1).add(" O ");
 
             blueFinished = mode.winningStrategies(this, pos);
 
@@ -80,7 +82,10 @@ import java.util.ArrayList;
                 System.out.println("Blue wins!");
                 winner = "blue";
             }
-
+            if (completedBoard()) {
+                System.out.println("Draw!");
+                turn = new CDGameFinished();
+            }
             turn = turn.next();
         }
 
@@ -175,5 +180,9 @@ import java.util.ArrayList;
 
         public String winner() {
             return winner;
+        }
+
+        public boolean completedBoard(){
+            return gameBoard.stream().allMatch(column -> column.size() == height);
         }
     }

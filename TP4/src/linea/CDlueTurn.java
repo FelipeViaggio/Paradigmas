@@ -1,8 +1,8 @@
 package linea;
 
-public class BlueTurn extends Turns {
-    public Turns next() {
-        return new RedTurn();
+public class CDlueTurn extends CCTurns {
+    public CCTurns next() {
+        return new CDRedTurn();
     }
 
     public void playRed() {
