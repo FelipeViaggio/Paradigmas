@@ -12,7 +12,6 @@ import java.util.stream.IntStream;
         private CCTurns turn = new CDRedTurn();
         private String winner;
         private static final String ERROR_POSITION = "Invalid position";
-        private static final String ERROR_MODE = "Invalid mode";
 
         private ArrayList<ArrayList<String>> gameBoard = new ArrayList<>();
 
