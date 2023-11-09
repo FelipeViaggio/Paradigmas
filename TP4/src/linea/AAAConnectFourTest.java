@@ -175,11 +175,12 @@ public class AAAConnectFourTest {
         game.playRedAt(3);
         game.playBlueAt(4);
         game.playRedAt(4);
-        game.playBlueAt(5);
+        game.playBlueAt(6);
         game.playRedAt(4);
         assertTrue(game.finished());
         assertEquals("red", game.winner());
     }
+
 
     @Test
     public void testInvalidTurnAfterGameFinished() {

@@ -14,15 +14,15 @@ import java.util.stream.IntStream;
         private String winner;
         private static final String ERROR_POSITION = "Invalid position";
 
-        public static ArrayList<ArrayList<String>> gameBoard = new ArrayList<>();
-
+        private ArrayList<ArrayList<String>> gameBoard;
 
         public AAConnectFour(int base, int height, char mode) {
             this.base = base;
             this.height = height;
             this.mode = BBGameModes.chosenMode(mode, this);
+            this.gameBoard = new ArrayList<>();
             IntStream.range(0, base).forEach(i -> gameBoard.add(new ArrayList<>()));
-            }
+        }
 
         public String show() {
             String board = IntStream.range(0, height)
@@ -43,7 +43,7 @@ import java.util.stream.IntStream;
                 throw new RuntimeException(ERROR_POSITION);
             }
 
-            turn = turn.playRed(pos, turn);
+            turn = turn.playRed(pos, turn, this.gameBoard);
 
             redFinished = mode.winningStrategies(this, pos);
 
@@ -62,7 +62,7 @@ import java.util.stream.IntStream;
                 throw new RuntimeException(ERROR_POSITION);
             }
 
-            turn = turn.playBlue(pos, turn);
+            turn = turn.playBlue(pos, turn, this.gameBoard);
 
             blueFinished = mode.winningStrategies(this, pos);
 
@@ -75,6 +75,7 @@ import java.util.stream.IntStream;
                 turn = new CDGameFinished();
             }
         }
+
 
         public boolean verticalWin(int col) {
             int row = gameBoard.get(col - 1).size();
