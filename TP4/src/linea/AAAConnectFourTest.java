@@ -54,17 +54,17 @@ public class AAAConnectFourTest {
     @Test
     public void testLeftDiagonalWin() {
         AAConnectFour game = new AAConnectFour(7, 6, 'B');
-        game.playRedAt(1);
-        game.playBlueAt(2);
-        game.playRedAt(2);
+        game.playRedAt(6);
+        game.playBlueAt(5);
+        game.playRedAt(5);
+        game.playBlueAt(4);
+        game.playRedAt(4);
+        game.playBlueAt(3);
+        game.playRedAt(4);
         game.playBlueAt(3);
         game.playRedAt(3);
-        game.playBlueAt(4);
+        game.playBlueAt(2);
         game.playRedAt(3);
-        game.playBlueAt(4);
-        game.playRedAt(4);
-        game.playBlueAt(5);
-        game.playRedAt(4);
         assertTrue(game.finished());
         assertEquals("red", game.winner());
     }
@@ -107,41 +107,36 @@ public class AAAConnectFourTest {
         game.playRedAt(2);
         game.playBlueAt(2);
         game.playRedAt(5);
+        game.playBlueAt(3);
+        game.playRedAt(3);
+        game.playBlueAt(3);
+        game.playRedAt(3);
+        game.playBlueAt(3);
+        game.playRedAt(3);
+        game.playBlueAt(4);
+        game.playRedAt(4);
+        game.playBlueAt(4);
+        game.playRedAt(4);
+        game.playBlueAt(4);
+        game.playRedAt(4);
+        game.playBlueAt(7);
+        game.playRedAt(7);
+        game.playBlueAt(7);
+        game.playRedAt(7);
+        game.playBlueAt(7);
+        game.playRedAt(7);
         game.playBlueAt(5);
         game.playRedAt(5);
         game.playBlueAt(5);
         game.playRedAt(5);
         game.playBlueAt(5);
         game.playRedAt(6);
-        game.playBlueAt(6);
-        game.playRedAt(6);
-        game.playBlueAt(6);
-        game.playRedAt(6);
-        game.playBlueAt(6);
-        game.playRedAt(3);
-        game.playBlueAt(3);
-        game.playRedAt(3);
-        game.playBlueAt(3);
-        game.playRedAt(3);
-        game.playBlueAt(3);
-        game.playRedAt(4);
-        game.playBlueAt(4);
-        game.playRedAt(4);
-        game.playBlueAt(4);
-        game.playRedAt(4);
-        game.playBlueAt(4);
-        game.playRedAt(7);
-        game.playBlueAt(7);
-        game.playRedAt(7);
-        game.playBlueAt(7);
-        game.playRedAt(7);
-        game.playBlueAt(7);
         assertTrue(game.finished());
         assertThrows(RuntimeException.class, () -> game.playBlueAt(1));
     }
 
     @Test
-    public void TestyouCannotplaywhengamefinished() {
+    public void testYouCannotplayWhenGameFinished() {
         AAConnectFour game = new AAConnectFour(1, 1, 'C');
         game.playRedAt(1);
         assertThrows(RuntimeException.class, () -> game.playBlueAt(1));
