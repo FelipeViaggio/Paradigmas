@@ -5,7 +5,7 @@ public class BCVerticalHorizontal extends BBGameModes {
         return mode == 'A';
     }
 
-    public boolean winningStrategies(AAConnectFour game, int pos) {
-        return !game.completedBoard() && (game.verticalWin(pos) || game.horizontalWin(pos));
+    public boolean finished(AAConnectFour game, int pos) {
+        return game.winnerVerticallyorHorizontally(pos) || game.isGameOverDiagonally(pos);
     }
 }

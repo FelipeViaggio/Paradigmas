@@ -1,8 +1,25 @@
 package linea;
 
-import java.util.ArrayList;
-
 public abstract class CCTurns {
-    public abstract CCTurns playRed(int column, CCTurns turn, ArrayList<ArrayList<String>> gameBoard);
-    public abstract CCTurns playBlue(int column, CCTurns turn, ArrayList<ArrayList<String>> gameBoard);
+
+    public boolean finished(){
+        return false;
+    }
+    public boolean redTurn(){
+        return false;
+    }
+    public boolean blueTurn(){
+        return false;
+    }
+
+    public abstract void playBlueAt(int pos, AAConnectFour aaConnectFour);
+
+    public abstract void playRedAt(int pos, AAConnectFour aaConnectFour);
+
+    public abstract String getCurrentChip();
+
+    public abstract String whoIsPlaying();
+
+    public abstract CCTurns nextTurn();
+
 }

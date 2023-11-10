@@ -1,13 +1,23 @@
 package linea;
 
-import java.util.ArrayList;
-
 public class CDGameFinished extends CCTurns {
-    public CCTurns playRed(int column, CCTurns turn, ArrayList<ArrayList<String>> gameBoard) {
+    public void playRedAt(int column, AAConnectFour aaConnectFour) {
         throw new RuntimeException("Game finished!");
     }
 
-    public CCTurns playBlue(int column, CCTurns turn, ArrayList<ArrayList<String>> gameBoard) {
+    public void playBlueAt(int column, AAConnectFour aaConnectFour) {
         throw new RuntimeException("Game finished!");
+    }
+
+    public String getCurrentChip() {
+        return " ";
+    }
+
+    public String whoIsPlaying() {
+        return "Game finished!";
+    }
+
+    public CCTurns nextTurn() {
+        return this ;
     }
 }

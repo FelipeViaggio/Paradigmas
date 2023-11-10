@@ -1,20 +1,17 @@
 package linea;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class BBGameModes {
-    public static ArrayList<BBGameModes> modos = new ArrayList<BBGameModes>( Arrays.asList( new BCVerticalHorizontal(), new BCDiagonal(), new BCAnyDirection() ) );
+    private static final List<BBGameModes> modes = Arrays.asList(new BCVerticalHorizontal(), new BCDiagonal(), new BCAnyDirection());
 
-    public static BBGameModes chosenMode(char mode, AAConnectFour game){
-        List<BBGameModes> chosen = modos.stream()
-                .filter( m -> m.letter( mode ) )
-                .toList();
-        return chosen.get(0);
+    public static BBGameModes chosenMode(char mode) {
+        return modes.stream()
+                .filter(m -> m.letter(mode))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid mode"));
     }
 
     public abstract boolean letter(char mode);
-    public abstract boolean winningStrategies(AAConnectFour game, int pos);
+    public abstract boolean finished(AAConnectFour game, int pos);
 }
-
-
