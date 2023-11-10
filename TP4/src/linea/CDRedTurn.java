@@ -11,7 +11,7 @@ public class CDRedTurn extends CCTurns {
     }
 
     public String getCurrentChip() {
-        return " ";
+        return "X";
     }
 
     public String whoIsPlaying() {

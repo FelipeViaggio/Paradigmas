@@ -97,17 +97,19 @@ public class AAConnectFour {
     }
 
     public boolean rowWin ( int place){
-        int rowIndex = gameBoard.get(place).size() - 1;
+        int rowIndex = gameBoard.get(place).size();
         String player = turn.getCurrentChip();
-        return IntStream.rangeClosed(place - 3, place)
-                .filter(i -> i >= 0 && i < base)
-                .mapToObj(col -> IntStream.range(0, 4)
-                        .allMatch(i -> getCurrentChip(col + i, rowIndex) == player))
-                .anyMatch(b -> b);
+        //return IntStream.rangeClosed(place - 3, place)
+        //        .filter(i -> i >= 0 && i < base)
+        //.mapToObj(col -> IntStream.range(0, 4)
+        //                .allMatch(i -> getCurrentChip(col + i, rowIndex) == player))
+        //        .anyMatch(b -> b);
+        return IntStream.range()
+
     }
 
     public boolean colWin ( int place) {
-        int rowIndex = gameBoard.get(place).size() - 1;
+        int rowIndex = gameBoard.get(place).size();
         String player = getCurrentChip(place, rowIndex);
         return IntStream.rangeClosed(rowIndex - 3, rowIndex)
                 .filter(i -> i >= 0 && i < height)
