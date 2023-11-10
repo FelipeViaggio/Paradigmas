@@ -11,15 +11,15 @@ public class AAConnectFour {
 
     private int base;
     private int height;
+    private ArrayList<ArrayList<String>> gameBoard;
     private BBGameModes mode;
     private CCTurns turn;
     private String currentPlayer;
-    private String winner;
-    private ArrayList<ArrayList<String>> gameBoard;
+    private String winner = "No hay ganador";
 
     public AAConnectFour(int base, int height, char mode) {
-        this.currentPlayer = "Red";
         this.turn = new CDRedTurn();
+        this.currentPlayer = "Red";
         this.base = base;
         this.height = height;
         this.mode = BBGameModes.chosenMode(mode);
@@ -99,12 +99,15 @@ public class AAConnectFour {
     public boolean rowWin ( int place){
         int rowIndex = gameBoard.get(place).size();
         String player = turn.getCurrentChip();
-        //return IntStream.rangeClosed(place - 3, place)
+        // return IntStream.rangeClosed(place - 3, place)
         //        .filter(i -> i >= 0 && i < base)
         //.mapToObj(col -> IntStream.range(0, 4)
         //                .allMatch(i -> getCurrentChip(col + i, rowIndex) == player))
         //        .anyMatch(b -> b);
-        return IntStream.range()
+        return false;
+//        return IntStream.rangeClosed(0, height - 3)
+//                .anyMatch(row -> IntStream.rangeClosed(0, 3)
+//                        .allMatch(i -> getCurrentChip(place, row + i).equals(player)));
 
     }
 
