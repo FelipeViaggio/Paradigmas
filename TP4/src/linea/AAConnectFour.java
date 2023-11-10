@@ -1,6 +1,7 @@
 package linea;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -98,28 +99,31 @@ import java.util.stream.IntStream;
                     .count() == 4;
         }
 
-        public boolean rightDiagonalWin(int col) {
-            int row = gameBoard.get(col - 1).size();
-            String chip = gameBoard.get(col - 1).get(row - 1);
-            int start = col - row;
-            return IntStream.range(0, base - start)
-                    .filter(i -> start + i >= 0 && gameBoard.get(start + i).size() > i)
-                    .mapToObj(i -> gameBoard.get(start + i).get(i))
-                    .filter(chip::equals)
-                    .limit(4)
-                    .count() == 4;
-        }
+    public boolean rightDiagonalWin(int col) {
+        int row = gameBoard.get(col - 1).size();
+        String chip = gameBoard.get(col - 1).get(row - 1);
+        int start = col - row;
+        List<String> diagonal = IntStream.range(0, base - start)
+                .filter(i -> start + i >= 0 && gameBoard.get(start + i).size() > i)
+                .mapToObj(i -> gameBoard.get(start + i).get(gameBoard.get(start + i).size() - 1 - i))
+                .collect(Collectors.toList());
+        return IntStream.range(0, diagonal.size() - 3)
+                .anyMatch(i -> diagonal.get(i).equals(chip) && diagonal.get(i + 1).equals(chip) && diagonal.get(i + 2).equals(chip) && diagonal.get(i + 3).equals(chip));
+    }
 
-        public boolean leftDiagonalWin(int col) {
+
+
+
+    public boolean leftDiagonalWin(int col) {
             int row = gameBoard.get(col - 1).size();
             String chip = gameBoard.get(col - 1).get(row - 1);
             int start = col + row - 2;
-            return IntStream.range(0, height)
+            List<String> diagonal = IntStream.range(0, height)
                     .filter(i -> start - i < base && start - i >= 0 && gameBoard.get(start - i).size() > i)
                     .mapToObj(i -> gameBoard.get(start - i).get(i))
-                    .filter(chip::equals)
-                    .limit(4)
-                    .count() == 4;
+                    .collect(Collectors.toList());
+            return IntStream.range(0, diagonal.size() - 3)
+                    .anyMatch(i -> diagonal.get(i).equals(chip) && diagonal.get(i + 1).equals(chip) && diagonal.get(i + 2).equals(chip) && diagonal.get(i + 3).equals(chip));
         }
 
 
@@ -130,4 +134,4 @@ import java.util.stream.IntStream;
         public boolean completedBoard(){
             return gameBoard.stream().allMatch(column -> column.size() == height);
         }
-    }
+}
