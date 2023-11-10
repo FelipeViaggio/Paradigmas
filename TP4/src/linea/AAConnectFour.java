@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-    public class AAConnectFour {
+//javac linea/Linea.java linea/Game.java
+//java linea.Game
+
+public class AAConnectFour {
         private int base;
         private int height;
         private BBGameModes mode;
