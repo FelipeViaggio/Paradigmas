@@ -20,4 +20,8 @@ public class CDBlueTurn extends CCTurns {
     public CCTurns nextTurn() {
         return new CDRedTurn();
     }
+
+    public boolean blueTurn() {
+        return true;
+    }
 }

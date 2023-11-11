@@ -173,7 +173,7 @@ public class AAAConnectFourTest {
         game.playBlueAt(5);
         game.playRedAt(4);
         assertTrue(game.finished());
-        assertEquals("red", game.winner());
+        assertEquals("Red", game.winner());
     }
 
 

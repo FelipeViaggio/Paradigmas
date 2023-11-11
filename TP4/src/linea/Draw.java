@@ -9,8 +9,8 @@ public class Draw extends CCTurns {
         throw new RuntimeException("Game finished!");
     }
 
-    public String getCurrentChip() {
-        return " ";
+    public char chip() {
+        return ' ';
     }
 
     public String whoIsPlaying() {
@@ -19,5 +19,9 @@ public class Draw extends CCTurns {
 
     public CCTurns nextTurn() {
         return this ;
+    }
+
+    public boolean finished() {
+        return true;
     }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+// javac linea/AAConnectFour.java linea/AGame.java
+
 public class AAConnectFour {
 
     private static final String ERROR_POSITION = "Invalid position";
@@ -15,7 +17,7 @@ public class AAConnectFour {
     private BBGameModes mode;
     private CCTurns turn;
     private String currentPlayer;
-    private String winner = "No hay ganador";
+    private String winner = "There is no winner yet";
 
     public AAConnectFour(int base, int height, char mode) {
         this.turn = new CDRedTurn();
@@ -27,16 +29,17 @@ public class AAConnectFour {
         IntStream.range(0, base).forEach(i -> gameBoard.add(new ArrayList<>()));
     }
 
-    public void placeChipInColumn(int column) {
-        if (column > base) {
-            throw new RuntimeException("Invalid column");
-        } else if (gameBoard.get(column - 1).size() == height) {
-            throw new RuntimeException("Column is full");
-        } else {
-            gameBoard.get(column - 1).add(turn.getCurrentChip());
-            this.turn = checkIfGameOver(column - 1);
-            this.currentPlayer = turn.whoIsPlaying();
-        }
+    public boolean isDraw() {
+        long totalSpaces = base * height;
+        long totalChips = gameBoard.stream()
+                .mapToLong(List::size)
+                .sum();
+
+        return totalSpaces == totalChips;
+    }
+
+    public boolean finished() {
+        return turn.finished();
     }
 
     public CCTurns checkIfGameOver(int column) {
@@ -49,14 +52,39 @@ public class AAConnectFour {
         return turn.nextTurn();
     }
 
+    public void placeChipInColumn(int column) {
+        if (column > base) {
+            throw new RuntimeException("Invalid column");
+        } else if (gameBoard.get(column - 1).size() == height) {
+            throw new RuntimeException("Column is full");
+        } else {
+            String chip = String.valueOf(turn.chip());
+            gameBoard.get(column - 1).add(chip);
+            this.turn = checkIfGameOver(column - 1);
+            this.currentPlayer = turn.whoIsPlaying();
+        }
+    }
 
-    public boolean isDraw() {
-        long totalSpaces = base * height;
-        long totalChips = gameBoard.stream()
-                .mapToLong(List::size)
-                .sum();
+    public char getCurrentChip ( int colIndex, int rowIndex){
+        if (colIndex < base && colIndex >= 0) {
+            if (gameBoard.get(colIndex).size() > rowIndex && rowIndex >= 0) {
+                return gameBoard.get(colIndex).get(rowIndex).charAt(0);
+            }
+        }
+        return ' ' ;
+    }
 
-        return totalSpaces == totalChips;
+    public void playRedAt(int column) {
+        turn.playRedAt(column, this);
+    }
+
+    public void playBlueAt ( int pos) {
+        turn.playBlueAt(pos, this);
+    }
+
+
+    public boolean isGameOverDiagonally ( int place){
+        return GameOverDiagonally(place, 1) || GameOverDiagonally(place, -1);
     }
 
     public String show() {
@@ -69,10 +97,6 @@ public class AAConnectFour {
         return board;
     }
 
-    public boolean finished() {
-        return turn.finished();
-    }
-
     public boolean redTurn() {
         return turn.redTurn();
     }
@@ -81,66 +105,32 @@ public class AAConnectFour {
         return turn.blueTurn();
     }
 
-    public void playRedAt(int pos) {
-        if (pos <= 0 || pos > base) {
-            throw new RuntimeException(ERROR_POSITION);
-        }
-        turn.playRedAt(pos, this);
-    }
+    public boolean winnerVerticallyorHorizontally ( int column ) {
+        Integer rowIndex = gameBoard.get(column).size() - 1;
+        char player = getCurrentChip( column , rowIndex );
 
-    public void playBlueAt ( int pos) {
-        if (pos <= 0 || pos > base) {
-            throw new RuntimeException(ERROR_POSITION);
-        }
-
-        turn.playBlueAt(pos, this);
-    }
-
-    public boolean rowWin ( int place ){
-        int rowIndex = gameBoard.get(place).size() - 1;
-        String player = turn.getCurrentChip();
-
-        return IntStream.rangeClosed(rowIndex - 3, rowIndex)
-                .filter(i -> i >= 0 && i < base)
+        boolean rowWin = IntStream.iterate(column - 3, i -> i + 1).limit(4)
                 .mapToObj(col -> IntStream.range(0, 4)
-                        .allMatch(i -> getCurrentChip(col + i, rowIndex).equals(player)))
-                .anyMatch(b -> b);
+                        .map( i -> getCurrentChip(col + i, rowIndex))
+                        .allMatch( c -> c == player))
+                .anyMatch(b -> b == true);
+
+        boolean colWin = IntStream.iterate(rowIndex - 3, i -> i + 1).limit(4)
+                .mapToObj(fila -> IntStream.range(0, 4)
+                        .map( i -> getCurrentChip( column , fila + i))
+                        .allMatch( c -> c == player))
+                .anyMatch(b -> b == true);
+
+        return rowWin || colWin;
     }
 
-    public boolean colWin ( int place ) {
-        int rowIndex = gameBoard.get(place).size();
-        String player = getCurrentChip(place, rowIndex);
-        return IntStream.rangeClosed(rowIndex - 3, rowIndex)
-                .filter(i -> i >= 0 && i < height)
-                .mapToObj(row -> IntStream.range(0, 4)
-                        .allMatch(i -> getCurrentChip(place, row + i).equals(player)))
-                .anyMatch(b -> b);
-    }
-
-    public boolean winnerVerticallyorHorizontally ( int place ){
-        return rowWin( place ) || colWin( place );
-    }
-
-    public boolean isGameOverDiagonally ( int place){
-        return isGameOverDiagonally(place, 1) || isGameOverDiagonally(place, -1);
-    }
-
-    private boolean isGameOverDiagonally ( int place, int direction){
+    private boolean GameOverDiagonally ( int place, int direction){
         int rowIndex = gameBoard.get(place).size() - 1;
-        String player = getCurrentChip(place, rowIndex);
+        char player = getCurrentChip(place, rowIndex);
         return IntStream.range(0, 4)
                 .mapToObj(i -> IntStream.range(0, 4)
                         .allMatch(j -> getCurrentChip(place + i + j * direction, rowIndex + i - j) == player))
                 .anyMatch(b -> b);
-    }
-
-    public String getCurrentChip ( int colIndex, int rowIndex){
-        if (colIndex < base && colIndex >= 0) {
-            if (gameBoard.get(colIndex).size() > rowIndex && rowIndex >= 0) {
-                return gameBoard.get(colIndex).get(rowIndex);
-            }
-        }
-        return " ";
     }
 
     public String winner () {

@@ -20,4 +20,8 @@ public class CDGameFinished extends CCTurns {
     public CCTurns nextTurn() {
         return this ;
     }
+
+    public boolean finished() {
+        return true;
+    }
 }

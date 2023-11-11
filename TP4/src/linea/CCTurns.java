@@ -2,13 +2,15 @@ package linea;
 
 public abstract class CCTurns {
 
-    public boolean finished(){
+    public boolean finished() {
         return false;
     }
-    public boolean redTurn(){
+
+    public boolean redTurn() {
         return false;
     }
-    public boolean blueTurn(){
+
+    public boolean blueTurn() {
         return false;
     }
 
