@@ -96,33 +96,29 @@ public class AAConnectFour {
         turn.playBlueAt(pos, this);
     }
 
-    public boolean rowWin ( int place){
-        int rowIndex = gameBoard.get(place).size();
+    public boolean rowWin ( int place ){
+        int rowIndex = gameBoard.get(place).size() - 1;
         String player = turn.getCurrentChip();
-        // return IntStream.rangeClosed(place - 3, place)
-        //        .filter(i -> i >= 0 && i < base)
-        //.mapToObj(col -> IntStream.range(0, 4)
-        //                .allMatch(i -> getCurrentChip(col + i, rowIndex) == player))
-        //        .anyMatch(b -> b);
-        return false;
-//        return IntStream.rangeClosed(0, height - 3)
-//                .anyMatch(row -> IntStream.rangeClosed(0, 3)
-//                        .allMatch(i -> getCurrentChip(place, row + i).equals(player)));
 
+        return IntStream.rangeClosed(rowIndex - 3, rowIndex)
+                .filter(i -> i >= 0 && i < base)
+                .mapToObj(col -> IntStream.range(0, 4)
+                        .allMatch(i -> getCurrentChip(col + i, rowIndex).equals(player)))
+                .anyMatch(b -> b);
     }
 
-    public boolean colWin ( int place) {
+    public boolean colWin ( int place ) {
         int rowIndex = gameBoard.get(place).size();
         String player = getCurrentChip(place, rowIndex);
         return IntStream.rangeClosed(rowIndex - 3, rowIndex)
                 .filter(i -> i >= 0 && i < height)
                 .mapToObj(row -> IntStream.range(0, 4)
-                        .allMatch(i -> getCurrentChip(place, row + i) == player))
+                        .allMatch(i -> getCurrentChip(place, row + i).equals(player)))
                 .anyMatch(b -> b);
     }
 
-    public boolean winnerVerticallyorHorizontally ( int place){
-        return rowWin(place) || colWin(place);
+    public boolean winnerVerticallyorHorizontally ( int place ){
+        return rowWin( place ) || colWin( place );
     }
 
     public boolean isGameOverDiagonally ( int place){
