@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 // javac linea/AAConnectFour.java linea/AGame.java
+// java linea.Game
 
 public class AAConnectFour {
 
