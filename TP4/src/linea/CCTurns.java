@@ -18,7 +18,7 @@ public abstract class CCTurns {
 
     public abstract void playRedAt(int pos, AAConnectFour aaConnectFour);
 
-    public abstract String getCurrentChip();
+    public abstract char chip();
 
     public abstract String whoIsPlaying();
 

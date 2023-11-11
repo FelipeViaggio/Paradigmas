@@ -9,8 +9,8 @@ public class CDGameFinished extends CCTurns {
         throw new RuntimeException("Game finished!");
     }
 
-    public String getCurrentChip() {
-        return " ";
+    public char chip() {
+        return ' ';
     }
 
     public String whoIsPlaying() {

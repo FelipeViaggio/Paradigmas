@@ -9,8 +9,8 @@ public class CDBlueTurn extends CCTurns {
         aaConnectFour.placeChipInColumn( column );
     }
 
-    public String getCurrentChip() {
-        return "0";
+    public char chip() {
+        return '0';
     }
 
     public String whoIsPlaying() {

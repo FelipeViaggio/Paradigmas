@@ -14,8 +14,8 @@ public class CDRedTurn extends CCTurns {
         throw new RuntimeException("Not your turn!");
     }
 
-    public String getCurrentChip() {
-        return "X";
+    public char chip() {
+        return 'X';
     }
 
     public String whoIsPlaying() {

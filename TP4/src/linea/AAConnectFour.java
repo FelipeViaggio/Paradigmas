@@ -53,8 +53,8 @@ public class AAConnectFour {
     }
 
     public void placeChipInColumn(int column) {
-        if (column > base) {
-            throw new RuntimeException("Invalid column");
+        if (column > base || column < 1) {
+            throw new RuntimeException("Column out of bounds");
         } else if (gameBoard.get(column - 1).size() == height) {
             throw new RuntimeException("Column is full");
         } else {

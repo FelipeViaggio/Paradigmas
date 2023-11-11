@@ -15,7 +15,7 @@ public class AAAConnectFourTest {
         game.playBlueAt(2);
         game.playRedAt(1);
         assertTrue(game.finished());
-        assertEquals("red", game.winner());
+        assertEquals("Red", game.winner());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class AAAConnectFourTest {
         game.playBlueAt(5);
         game.playRedAt(4);
         assertTrue(game.finished());
-        assertEquals("red", game.winner());
+        assertEquals("Red", game.winner());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class AAAConnectFourTest {
         game.playBlueAt(5);
         game.playRedAt(4);
         assertTrue(game.finished());
-        assertEquals("red", game.winner());
+        assertEquals("Red", game.winner());
     }
 
 
@@ -66,7 +66,7 @@ public class AAAConnectFourTest {
         game.playBlueAt(2);
         game.playRedAt(3);
         assertTrue(game.finished());
-        assertEquals("red", game.winner());
+        assertEquals("Red", game.winner());
     }
 
     @Test
@@ -92,47 +92,14 @@ public class AAAConnectFourTest {
     }
 
     @Test
-    public void testGameFinished() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'C');
-        game.playRedAt(1);
-        game.playBlueAt(1);
-        game.playRedAt(1);
-        game.playBlueAt(1);
+    public void testNoSpaceLeftItsADraw() {
+        AAConnectFour game = new AAConnectFour(2, 2, 'C');
         game.playRedAt(1);
         game.playBlueAt(1);
         game.playRedAt(2);
         game.playBlueAt(2);
-        game.playRedAt(2);
-        game.playBlueAt(2);
-        game.playRedAt(2);
-        game.playBlueAt(2);
-        game.playRedAt(5);
-        game.playBlueAt(3);
-        game.playRedAt(3);
-        game.playBlueAt(3);
-        game.playRedAt(3);
-        game.playBlueAt(3);
-        game.playRedAt(3);
-        game.playBlueAt(4);
-        game.playRedAt(4);
-        game.playBlueAt(4);
-        game.playRedAt(4);
-        game.playBlueAt(4);
-        game.playRedAt(4);
-        game.playBlueAt(7);
-        game.playRedAt(7);
-        game.playBlueAt(7);
-        game.playRedAt(7);
-        game.playBlueAt(7);
-        game.playRedAt(7);
-        game.playBlueAt(5);
-        game.playRedAt(5);
-        game.playBlueAt(5);
-        game.playRedAt(5);
-        game.playBlueAt(5);
-        game.playRedAt(6);
         assertTrue(game.finished());
-        assertThrows(RuntimeException.class, () -> game.playBlueAt(1));
+        assertEquals( "There is no winner yet", game.winner());
     }
 
     @Test
@@ -155,7 +122,7 @@ public class AAAConnectFourTest {
         game.playBlueAt(2);
         game.playRedAt(3);
         assertTrue(game.finished());
-        assertNull(game.winner());
+        assertEquals( "There is no winner yet", game.winner());
     }
 
     @Test
@@ -170,7 +137,7 @@ public class AAAConnectFourTest {
         game.playRedAt(3);
         game.playBlueAt(4);
         game.playRedAt(4);
-        game.playBlueAt(5);
+        game.playBlueAt(1);
         game.playRedAt(4);
         assertTrue(game.finished());
         assertEquals("Red", game.winner());

@@ -5,7 +5,7 @@ public class BCAnyDirection extends BBGameModes {
         return mode == 'C';
     }
 
-    public boolean finished(AAConnectFour game, int pos) {
-        return game.winnerVerticallyorHorizontally(pos);
+    public boolean finished(AAConnectFour game, int column) {
+        return game.winnerVerticallyorHorizontally( column ) || game.isGameOverDiagonally( column );
     }
 }
