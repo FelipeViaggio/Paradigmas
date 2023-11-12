@@ -103,8 +103,6 @@ public class AAConnectFour {
             mostrar.append("\nDraw!");
         } else if ( finished() ) {
             mostrar.append("\n" + winner() + " wins!");
-        } else {
-            mostrar.append("\n" + turn.whoIsPlaying() + " turn");
         }
 
 
