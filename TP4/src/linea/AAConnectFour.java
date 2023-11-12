@@ -125,24 +125,24 @@ public class AAConnectFour {
     }
 
 
-    public String show() {
-        StringBuilder board = new StringBuilder();
-        IntStream.range(0, height).forEach(i -> {
-            board.append("|");
-            IntStream.range(0, base).forEach(j -> {
-                board.append( getCurrentChip( j, height - i - 1 ) );
-                board.append("|");
-            });
-            board.append("\n");
-        });
-        if ( itIsADraw() ){
-            board.append("\nDraw!");
-        } else if ( finished() ) {
-            board.append("\n" + winner() + " wins!");
-        }
-        return board.toString();
-
-    }
+//    public String show() {
+//        StringBuilder board = new StringBuilder();
+//        IntStream.range(0, height).forEach(i -> {
+//            board.append("|");
+//            IntStream.range(0, base).forEach(j -> {
+//                board.append( getCurrentChip( j, height - i - 1 ) );
+//                board.append("|");
+//            });
+//            board.append("\n");
+//        });
+//        if ( itIsADraw() ){
+//            board.append("\nDraw!");
+//        } else if ( finished() ) {
+//            board.append("\n" + winner() + " wins!");
+//        }
+//        return board.toString();
+//
+//    }
 
     private boolean theColumnIsFull(int column) {
         return gameBoard.get(column - 1).size() == height;
@@ -156,14 +156,14 @@ public class AAConnectFour {
         return gameBoard.get(column).size() > row && row >= 0;
     }
 
-//    public String show() {
-//        String board =
-//                IntStream.range(0, height)
-//                .mapToObj(i -> "\n|" + IntStream.range(0, base)
-//                        .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : "-")
-//                        .collect(Collectors.joining()) + "|")
-//                .collect(Collectors.joining());
-//        board += "\n|" + " \uD83D\uDD3C ".repeat(base) + "|";
-//        return board;
-//    }
+    public String show() {
+        String board =
+                IntStream.range(0, height)
+                .mapToObj(i -> "\n|" + IntStream.range(0, base)
+                        .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : "-")
+                        .collect(Collectors.joining()) + "|")
+                .collect(Collectors.joining());
+        board += "\n|" + " \uD83D\uDD3C ".repeat(base) + "|";
+        return board;
+    }
 }
