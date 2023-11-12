@@ -14,7 +14,7 @@ public class CDRedTurn extends CCTurns {
         throw new RuntimeException("Not your turn!");
     }
 
-    public char chip() {
+    public char grabTheCorrespondingChip() {
         return 'X';
     }
 

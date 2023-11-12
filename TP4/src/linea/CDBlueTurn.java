@@ -9,7 +9,7 @@ public class CDBlueTurn extends CCTurns {
         aaConnectFour.placeChipInColumn( column );
     }
 
-    public char chip() {
+    public char grabTheCorrespondingChip() {
         return '0';
     }
 

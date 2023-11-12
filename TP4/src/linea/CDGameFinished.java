@@ -9,7 +9,7 @@ public class CDGameFinished extends CCTurns {
         throw new RuntimeException("Game finished!");
     }
 
-    public char chip() {
+    public char grabTheCorrespondingChip() {
         return ' ';
     }
 
