@@ -100,7 +100,7 @@ public class AAConnectFour {
         });
         mostrar.delete(mostrar.length() - 1, mostrar.length());
         if ( finished() ) {
-            mostrar.append("\nEl juego termino. El ganador es: ");
+            mostrar.append("\n" + winner() + " wins!");
             mostrar.append( winner );
         }
         return mostrar.toString();
