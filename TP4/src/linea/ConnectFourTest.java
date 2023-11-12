@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ConnectFourTest {
     @Test
-    public void testVerticalWin() {
+    public void test01VerticalWin() {
         ConnectFour game = new ConnectFour(7, 6, 'A');
         game.playRedAt(1);
         game.playBlueAt(2);
@@ -19,7 +19,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    public void testHorizontalWin() {
+    public void test02HorizontalWin() {
         ConnectFour game = new ConnectFour(7, 6, 'A');
         game.playRedAt(1);
         game.playBlueAt(5);
@@ -33,7 +33,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    public void testRightDiagonalWin() {
+    public void test03RightDiagonalWin() {
         ConnectFour game = new ConnectFour(7, 6, 'B');
         game.playRedAt(1);
         game.playBlueAt(2);
@@ -52,7 +52,7 @@ public class ConnectFourTest {
 
 
     @Test
-    public void testLeftDiagonalWin() {
+    public void test04LeftDiagonalWin() {
         ConnectFour game = new ConnectFour(7, 6, 'B');
         game.playRedAt(6);
         game.playBlueAt(5);
@@ -70,7 +70,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    public void testTurnSwitching() {
+    public void test05TurnSwitching() {
         ConnectFour game = new ConnectFour(7, 6, 'C');
         game.playRedAt(1);
         assertThrows(RuntimeException.class, () -> game.playRedAt(2));
@@ -79,7 +79,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    public void testInvalidPosition() {
+    public void test06InvalidPosition() {
         ConnectFour game = new ConnectFour(7, 6, 'C');
         assertThrows(RuntimeException.class, () -> game.playRedAt(0));
         assertThrows(RuntimeException.class, () -> game.playRedAt(8));
@@ -87,12 +87,12 @@ public class ConnectFourTest {
 
 
     @Test
-    public void testInvalidMode() {
+    public void test07InvalidMode() {
         assertThrows(RuntimeException.class, () -> new ConnectFour(7, 6, 'D'));
     }
 
     @Test
-    public void testNoSpaceLeftItsADraw() {
+    public void test08NoSpaceLeftItsADraw() {
         ConnectFour game = new ConnectFour(2, 2, 'C');
         game.playRedAt(1);
         game.playBlueAt(1);
@@ -103,14 +103,14 @@ public class ConnectFourTest {
     }
 
     @Test
-    public void testYouCannotPlayWhenGameFinished() {
+    public void test09YouCannotPlayWhenGameFinished() {
         ConnectFour game = new ConnectFour(1, 1, 'C');
         game.playRedAt(1);
         assertThrows(RuntimeException.class, () -> game.playBlueAt(1));
     }
 
     @Test
-    public void testDraw() {
+    public void test10Draw() {
         ConnectFour game = new ConnectFour(3, 3, 'C');
         game.playRedAt(1);
         game.playBlueAt(2);
@@ -126,7 +126,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    public void testAnyDirectionWin() {
+    public void test11AnyDirectionWin() {
         ConnectFour game = new ConnectFour(7, 6, 'C');
         game.playRedAt(1);
         game.playBlueAt(2);
@@ -145,7 +145,7 @@ public class ConnectFourTest {
 
 
     @Test
-    public void testInvalidTurnAfterGameFinished() {
+    public void test12InvalidTurnAfterGameFinished() {
         ConnectFour game = new ConnectFour(1, 1, 'C');
         game.playRedAt(1);
         assertTrue(game.finished());
