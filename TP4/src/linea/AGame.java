@@ -4,7 +4,7 @@ public class AGame {
 
     public static void main( String[] args) throws Exception {
 
-        System.out.println( "Dimensions?");
+        System.out.println( "Dimensions");
         AAConnectFour game = new AAConnectFour( prompt( "Base? " ), prompt( "Height? " ), 'C' );
         System.out.println( game.show() );
 
