@@ -89,15 +89,34 @@ public class AAConnectFour {
     }
 
     public String show() {
-        String board =
-                IntStream.range(0, height)
-                .mapToObj(i -> "\n|" + IntStream.range(0, base)
-                        .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : " - ")
-                        .collect(Collectors.joining()) + "|")
-                .collect(Collectors.joining());
-        board += "\n|" + " \uD83D\uDD3C ".repeat(base) + "|";
-        return board;
+        StringBuilder mostrar = new StringBuilder();
+        IntStream.range(0, height).forEach(i -> {
+            mostrar.append("|");
+            IntStream.range(0, base).forEach(j -> {
+                mostrar.append( getCurrentChip( j, height - i - 1 ) );
+                mostrar.append("|");
+            });
+            mostrar.append("\n");
+        });
+        mostrar.delete(mostrar.length() - 1, mostrar.length());
+        if ( finished() ) {
+            mostrar.append("\nEl juego termino. El ganador es: ");
+            mostrar.append( winner );
+        }
+        return mostrar.toString();
+
     }
+
+//    public String show() {
+//        String board =
+//                IntStream.range(0, height)
+//                .mapToObj(i -> "\n|" + IntStream.range(0, base)
+//                        .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : "-")
+//                        .collect(Collectors.joining()) + "|")
+//                .collect(Collectors.joining());
+//        board += "\n|" + " \uD83D\uDD3C ".repeat(base) + "|";
+//        return board;
+//    }
 
     public boolean redTurn() {
         return turn.redTurn();
