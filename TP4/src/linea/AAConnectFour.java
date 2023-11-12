@@ -98,7 +98,6 @@ public class AAConnectFour {
             });
             board.append("\n");
         });
-//        board.delete( board.length() - 1, board.length() );
         if ( isDraw() ){
             board.append("\nDraw!");
         } else if ( finished() ) {
