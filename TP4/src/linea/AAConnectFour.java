@@ -89,9 +89,10 @@ public class AAConnectFour {
     }
 
     public String show() {
-        String board = IntStream.range(0, height)
+        String board =
+                IntStream.range(0, height)
                 .mapToObj(i -> "\n|" + IntStream.range(0, base)
-                        .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : "-")
+                        .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : " - ")
                         .collect(Collectors.joining()) + "|")
                 .collect(Collectors.joining());
         board += "\n|" + " \uD83D\uDD3C ".repeat(base) + "|";
