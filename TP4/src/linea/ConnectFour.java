@@ -127,21 +127,29 @@ public class ConnectFour {
 
     public String show() {
         StringBuilder board = new StringBuilder();
+        int columnWidth = 1; // Ajusta esto según el ancho deseado para las columnas
+
         IntStream.range(0, height).forEach(i -> {
             board.append("|");
             IntStream.range(0, base).forEach(j -> {
-                board.append( getCurrentChip( j, height - i - 1 ) );
+                char cellContent = getCurrentChip(j, height - i - 1);
+                String formattedCell = String.format("%-" + columnWidth + "s", cellContent != ' ' ? String.valueOf(cellContent) : "-");
+                board.append(formattedCell);
                 board.append("|");
             });
             board.append("\n");
         });
-        if ( itIsADraw() ){
+        board.append("|");
+        IntStream.range(1, base + 1).forEach(j -> board.append(String.format("%" + columnWidth + "d|", j)));
+        board.append("\n");
+
+        if (itIsADraw()) {
             board.append("\nDraw!");
-        } else if ( finished() ) {
+        } else if (finished()) {
             board.append("\n" + winner() + " wins!");
         }
-        return board.toString();
 
+        return board.toString();
     }
 
     private boolean theColumnIsFull(int column) {
@@ -159,15 +167,4 @@ public class ConnectFour {
     private int getRowIndex(int column) {
         return gameBoard.get(column).size() - 1;
     }
-
-//    public String show() {
-//        String board =
-//                IntStream.range(0, height)
-//                .mapToObj(i -> "\n|" + IntStream.range(0, base)
-//                        .mapToObj(j -> gameBoard.get(j).size() > height - 1 - i ? gameBoard.get(j).get(height - 1 - i) : "-")
-//                        .collect(Collectors.joining()) + "|")
-//                .collect(Collectors.joining());
-//        board += "\n|" + " \uD83D\uDD3C ".repeat(base) + "|";
-//        return board;
-//    }
 }
