@@ -89,31 +89,22 @@ public class AAConnectFour {
     }
 
     public String show() {
-        StringBuilder mostrar = new StringBuilder();
+        StringBuilder board = new StringBuilder();
         IntStream.range(0, height).forEach(i -> {
-            mostrar.append("|");
+            board.append("|");
             IntStream.range(0, base).forEach(j -> {
-                mostrar.append( getCurrentChip( j, height - i - 1 ) );
-                mostrar.append("|");
+                board.append( getCurrentChip( j, height - i - 1 ) );
+                board.append("|");
             });
-            mostrar.append("\n");
+            board.append("\n");
         });
-        mostrar.delete(mostrar.length() - 1, mostrar.length());
+        board.delete(board.length() - 1, board.length());
         if ( isDraw() ){
-            mostrar.append("\nDraw!");
+            board.append("\nDraw!");
         } else if ( finished() ) {
-            mostrar.append("\n" + winner() + " wins!");
+            board.append("\n" + winner() + " wins!");
         }
-
-
-//        if ( finished() ) {
-//            mostrar.append("\n" + winner() + " wins!");
-//        } else if ( isDraw() ) {
-//            mostrar.append("\nDraw!");
-//        } else {
-//            mostrar.append("\n" + turn.whoIsPlaying() + " turn");
-//        }
-        return mostrar.toString();
+        return board.toString();
 
     }
 

@@ -4,15 +4,15 @@ public class AGame {
 
     public static void main( String[] args) throws Exception {
 
-        System.out.println( "Dimensiones?");
-        AAConnectFour game = new AAConnectFour( prompt( "Base? " ), prompt( "Altura? " ), 'C' );
+        System.out.println( "Dimensions?");
+        AAConnectFour game = new AAConnectFour( prompt( "Base? " ), prompt( "Height? " ), 'C' );
         System.out.println( game.show() );
 
         while ( !game.finished() ) {
-            game.playRedAt( prompt( "Juegan las rojas: " ) );
+            game.playRedAt( prompt( "Red's turn: " ) );
             System.out.println( game.show() );
             if ( !game.finished() ) {
-                game.playBlueAt( prompt( "Juegan las azules: " ) );
+                game.playBlueAt( prompt( "Blue's turn: " ) );
                 System.out.println( game.show() );
             }
         }
