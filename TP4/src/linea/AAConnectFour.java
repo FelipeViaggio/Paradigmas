@@ -99,10 +99,22 @@ public class AAConnectFour {
             mostrar.append("\n");
         });
         mostrar.delete(mostrar.length() - 1, mostrar.length());
-        if ( finished() ) {
+        if ( isDraw() ){
+            mostrar.append("\nDraw!");
+        } else if ( finished() ) {
             mostrar.append("\n" + winner() + " wins!");
-            mostrar.append( winner );
+        } else {
+            mostrar.append("\n" + turn.whoIsPlaying() + " turn");
         }
+
+
+//        if ( finished() ) {
+//            mostrar.append("\n" + winner() + " wins!");
+//        } else if ( isDraw() ) {
+//            mostrar.append("\nDraw!");
+//        } else {
+//            mostrar.append("\n" + turn.whoIsPlaying() + " turn");
+//        }
         return mostrar.toString();
 
     }
