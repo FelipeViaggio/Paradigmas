@@ -3,10 +3,10 @@ package linea;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AAAConnectFourTest {
+public class ConnectFourTest {
     @Test
     public void testVerticalWin() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'A');
+        ConnectFour game = new ConnectFour(7, 6, 'A');
         game.playRedAt(1);
         game.playBlueAt(2);
         game.playRedAt(1);
@@ -20,7 +20,7 @@ public class AAAConnectFourTest {
 
     @Test
     public void testHorizontalWin() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'A');
+        ConnectFour game = new ConnectFour(7, 6, 'A');
         game.playRedAt(1);
         game.playBlueAt(5);
         game.playRedAt(2);
@@ -34,7 +34,7 @@ public class AAAConnectFourTest {
 
     @Test
     public void testRightDiagonalWin() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'B');
+        ConnectFour game = new ConnectFour(7, 6, 'B');
         game.playRedAt(1);
         game.playBlueAt(2);
         game.playRedAt(2);
@@ -53,7 +53,7 @@ public class AAAConnectFourTest {
 
     @Test
     public void testLeftDiagonalWin() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'B');
+        ConnectFour game = new ConnectFour(7, 6, 'B');
         game.playRedAt(6);
         game.playBlueAt(5);
         game.playRedAt(5);
@@ -71,7 +71,7 @@ public class AAAConnectFourTest {
 
     @Test
     public void testTurnSwitching() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'C');
+        ConnectFour game = new ConnectFour(7, 6, 'C');
         game.playRedAt(1);
         assertThrows(RuntimeException.class, () -> game.playRedAt(2));
         game.playBlueAt(2);
@@ -80,7 +80,7 @@ public class AAAConnectFourTest {
 
     @Test
     public void testInvalidPosition() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'C');
+        ConnectFour game = new ConnectFour(7, 6, 'C');
         assertThrows(RuntimeException.class, () -> game.playRedAt(0));
         assertThrows(RuntimeException.class, () -> game.playRedAt(8));
     }
@@ -88,12 +88,12 @@ public class AAAConnectFourTest {
 
     @Test
     public void testInvalidMode() {
-        assertThrows(RuntimeException.class, () -> new AAConnectFour(7, 6, 'D'));
+        assertThrows(RuntimeException.class, () -> new ConnectFour(7, 6, 'D'));
     }
 
     @Test
     public void testNoSpaceLeftItsADraw() {
-        AAConnectFour game = new AAConnectFour(2, 2, 'C');
+        ConnectFour game = new ConnectFour(2, 2, 'C');
         game.playRedAt(1);
         game.playBlueAt(1);
         game.playRedAt(2);
@@ -104,14 +104,14 @@ public class AAAConnectFourTest {
 
     @Test
     public void testYouCannotPlayWhenGameFinished() {
-        AAConnectFour game = new AAConnectFour(1, 1, 'C');
+        ConnectFour game = new ConnectFour(1, 1, 'C');
         game.playRedAt(1);
         assertThrows(RuntimeException.class, () -> game.playBlueAt(1));
     }
 
     @Test
     public void testDraw() {
-        AAConnectFour game = new AAConnectFour(3, 3, 'C');
+        ConnectFour game = new ConnectFour(3, 3, 'C');
         game.playRedAt(1);
         game.playBlueAt(2);
         game.playRedAt(3);
@@ -127,7 +127,7 @@ public class AAAConnectFourTest {
 
     @Test
     public void testAnyDirectionWin() {
-        AAConnectFour game = new AAConnectFour(7, 6, 'C');
+        ConnectFour game = new ConnectFour(7, 6, 'C');
         game.playRedAt(1);
         game.playBlueAt(2);
         game.playRedAt(2);
@@ -146,7 +146,7 @@ public class AAAConnectFourTest {
 
     @Test
     public void testInvalidTurnAfterGameFinished() {
-        AAConnectFour game = new AAConnectFour(1, 1, 'C');
+        ConnectFour game = new ConnectFour(1, 1, 'C');
         game.playRedAt(1);
         assertTrue(game.finished());
         assertThrows(RuntimeException.class, () -> game.playBlueAt(1));

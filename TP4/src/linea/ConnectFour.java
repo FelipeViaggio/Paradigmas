@@ -2,29 +2,27 @@ package linea;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AAConnectFour {
+public class ConnectFour {
 
-    public static final String ERROR_POSITION = "Invalid position";
     public static final String COLUMN_OUT_OF_BOUNDS = "Column out of bounds";
     public static final String COLUMN_IS_FULL = "Column is full";
 
     private int base;
     private int height;
     private ArrayList<ArrayList<String>> gameBoard;
-    private BBGameModes mode;
-    private CCTurns currentTurn;
+    private GameModes mode;
+    private GameStates currentTurn;
     private String currentPlayer;
     private String winner = "There is no winner yet";
 
-    public AAConnectFour( int base, int height, char mode ) {
-        this.currentTurn = new CDRedTurn();
+    public ConnectFour(int base, int height, char mode ) {
+        this.currentTurn = new RedTurn();
         this.currentPlayer = "Red";
         this.base = base;
         this.height = height;
-        this.mode = BBGameModes.chosenMode(mode);
+        this.mode = GameModes.chosenMode(mode);
         this.gameBoard = new ArrayList<>();
         IntStream.range(0, base).forEach(i -> gameBoard.add(new ArrayList<>()));
     }
@@ -75,12 +73,12 @@ public class AAConnectFour {
         return totalSpaces == totalChips;
     }
 
-    public CCTurns getNextTurnIfGameNotOver(int column) {
+    public GameStates getNextTurnIfGameNotOver(int column) {
         if (itIsADraw()) {
             return new Draw();
         } else if (mode.finished(this, column)) {
             this.winner = this.currentPlayer;
-            return new CDGameFinished();
+            return new GameFinished();
         }
         return currentTurn.nextTurn();
     }
@@ -92,38 +90,40 @@ public class AAConnectFour {
         return ' ' ;
     }
 
-    public boolean winnerVerticallyorHorizontally ( int column ) {
-        Integer rowIndex = gameBoard.get(column).size() - 1;
-        char player = getCurrentChip( column , rowIndex );
+    public boolean isGameOverVerticallyOrHorizontally(int column) {
+        int rowIndex = getRowIndex(column);
+        char currentPlayerChip = getCurrentChip(column, rowIndex);
 
-        boolean rowWin = IntStream.iterate(column - 3, i -> i + 1).limit(4)
-                .mapToObj(col -> IntStream.range(0, 4)
-                        .map( i -> getCurrentChip(col + i, rowIndex))
-                        .allMatch( c -> c == player))
-                .anyMatch(b -> b == true);
-
-        boolean colWin = IntStream.iterate(rowIndex - 3, i -> i + 1).limit(4)
-                .mapToObj(fila -> IntStream.range(0, 4)
-                        .map( i -> getCurrentChip( column , fila + i))
-                        .allMatch( c -> c == player))
-                .anyMatch(b -> b == true);
-
-        return rowWin || colWin;
+        return checkRowWin(column, rowIndex, currentPlayerChip) || checkColumnWin(column, rowIndex, currentPlayerChip);
     }
 
-    public boolean isGameOverDiagonally ( int place){
-        return GameOverDiagonally(place, 1) || GameOverDiagonally(place, -1);
+    private boolean checkRowWin(int column, int rowIndex, char player) {
+        return IntStream.rangeClosed(column - 3, column)
+                .filter(col -> col >= 0 && col < base)
+                .anyMatch(col -> IntStream.rangeClosed(col, col + 3)
+                        .allMatch(c -> getCurrentChip(c, rowIndex) == player));
     }
 
-    private boolean GameOverDiagonally ( int place, int direction){
-        int rowIndex = gameBoard.get(place).size() - 1;
-        char player = getCurrentChip(place, rowIndex);
+    private boolean checkColumnWin(int column, int rowIndex, char player) {
+        return IntStream.rangeClosed(rowIndex - 3, rowIndex)
+                .filter(row -> row >= 0 && row < height)
+                .anyMatch(row -> IntStream.rangeClosed(row, row + 3)
+                        .allMatch(r -> getCurrentChip(column, r) == player));
+    }
+
+    public boolean isGameOverDiagonally(int column) {
+        return checkGameOverDiagonally(column, 1) || checkGameOverDiagonally(column, -1);
+    }
+
+    private boolean checkGameOverDiagonally(int column, int direction) {
+        int rowIndex = getRowIndex(column);
+        char currentPlayerChip = getCurrentChip(column, rowIndex);
+
         return IntStream.range(0, 4)
                 .mapToObj(i -> IntStream.range(0, 4)
-                        .allMatch(j -> getCurrentChip(place + i + j * direction, rowIndex + i - j) == player))
-                .anyMatch(b -> b);
+                        .allMatch(j -> getCurrentChip(column + i + j * direction, rowIndex + i - j) == currentPlayerChip))
+                        .anyMatch(hasWon -> hasWon);
     }
-
 
     public String show() {
         StringBuilder board = new StringBuilder();
@@ -154,6 +154,10 @@ public class AAConnectFour {
 
     private boolean rowExistsInColumn(int column, int row) {
         return gameBoard.get(column).size() > row && row >= 0;
+    }
+
+    private int getRowIndex(int column) {
+        return gameBoard.get(column).size() - 1;
     }
 
 //    public String show() {

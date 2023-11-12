@@ -1,6 +1,6 @@
 package linea;
 
-public abstract class CCTurns {
+public abstract class GameStates {
 
     public boolean finished() {
         return false;
@@ -14,14 +14,13 @@ public abstract class CCTurns {
         return false;
     }
 
-    public abstract void playBlueAt(int pos, AAConnectFour aaConnectFour);
+    public abstract void playRedAt(int column, ConnectFour aaConnectFour);
 
-    public abstract void playRedAt(int pos, AAConnectFour aaConnectFour);
+    public abstract void playBlueAt(int column, ConnectFour aaConnectFour);
 
     public abstract char grabTheCorrespondingChip();
 
     public abstract String whoIsPlaying();
 
-    public abstract CCTurns nextTurn();
-
+    public abstract GameStates nextTurn();
 }
