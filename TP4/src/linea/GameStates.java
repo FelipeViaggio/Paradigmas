@@ -14,6 +14,10 @@ public abstract class GameStates {
         return false;
     }
 
+    public boolean equals(Object state){
+        return state.getClass() == this.getClass();
+    }
+
     public abstract void playRedAt(int column, ConnectFour aaConnectFour);
 
     public abstract void playBlueAt(int column, ConnectFour aaConnectFour);
@@ -23,4 +27,5 @@ public abstract class GameStates {
     public abstract String whoIsPlaying();
 
     public abstract GameStates nextTurn();
+
 }

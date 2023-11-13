@@ -48,6 +48,10 @@ public class ConnectFour {
         currentTurn.playBlueAt(column, this);
     }
 
+    public GameStates currentGameState(){
+        return this.currentTurn;
+    }
+
     public boolean redTurn() {
         return currentTurn.redTurn();
     }
@@ -166,5 +170,9 @@ public class ConnectFour {
 
     private int getRowIndex(int column) {
         return gameBoard.get(column).size() - 1;
+    }
+
+    public String chipInThisPosition(int column, int row){
+        return gameBoard.get(column - 1).get(row - 1);
     }
 }

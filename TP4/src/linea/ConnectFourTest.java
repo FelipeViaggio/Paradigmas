@@ -1,9 +1,33 @@
 package linea;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.function.Executable;
+
+import org.junit.jupiter.api.BeforeEach;
+
+import java.util.stream.IntStream;
 
 public class ConnectFourTest {
+
+    public static final String THERE_IS_NO_WINNER_YET = "There is no winner yet";
+    public static final String BLUE = "Blue";
+    public static final String RED = "Red";
+    private ConnectFour game;
+
+    @BeforeEach
+    public void gameCreation(){ game = new ConnectFour(6, 6, 'C');}
+
+    @Test
+    public void test01CannotInsertAnInvalidMode(){
+    assertThrowsLike(() -> new ConnectFour(6, 6, 'E'), "Invalid mode");
+    }
+
     @Test
     public void test02GameboardStartsEmpty() {
         IntStream.rangeClosed(1, 4)
@@ -83,7 +107,7 @@ public class ConnectFourTest {
     public void test13RedPlayerWinsVerticallyCorrectly(){
         RedWinsHorizontally();
         assertTrue(game.finished());
-        assertEquals("Red", game.winner());
+        assertEquals(RED, game.winner());
     }
 
     @Test
@@ -97,14 +121,21 @@ public class ConnectFourTest {
     public void test15RedPlayerWinsHorizontallyCorrectly() {
         RedWinsHorizontally();
         assertTrue(game.finished());
-        assertEquals("Red", game.winner());
+        assertEquals(RED, game.winner());
+    }
+
+    @Test
+    public void test16BluePlayerWinsHorizontallyCorrectly(){
+        BlueWinsHorizontally();
+        assertTrue(game.finished());
+        assertEquals(BLUE, game.winner());
     }
 
     @Test
     public void test17RedPlayerWinsRightDiagonallyCorrectly() {
         RedWinsRightDiagonally();
         assertTrue(game.finished());
-        assertEquals("Red", game.winner());
+        assertEquals(RED, game.winner());
     }
 
 
@@ -112,7 +143,7 @@ public class ConnectFourTest {
     public void test18RedPlayerWinsLeftDiagonallyCorrectly() {
         RedWinsLeftDiagonally();
         assertTrue(game.finished());
-        assertEquals("Red", game.winner());
+        assertEquals(RED, game.winner());
     }
 
     @Test
